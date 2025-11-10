@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>教师介绍 | 我的课程</title>
+  <style>
+    :root {
+      --maxw: 1100px;
+      --accent: #0b74de;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0;
+      background: #f7f9fb;
+      color: #111;
+    }
+    .container {
+      max-width: var(--maxw);
+      margin: 28px auto;
+      padding: 18px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 18px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(10,10,20,0.06);
+      overflow: hidden;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 10px;
+      background: #eee;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #888;
+    }
+    .name {
+      font-weight: 700;
+    }
+    .role {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .bio {
+      margin-top: 10px;
+      line-height: 1.5;
+      color: #333;
+    }
+    .media {
+      margin-top: 12px;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+    }
+    .media iframe, .media video {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      border: 0;
+      overflow: hidden;
+    }
+    .tools {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    footer {
+      margin-top: 22px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>我们的教师团队</h1>
+      <div style="margin-left:auto;color:#666;font-size:0.95rem">点击查看课程时间表</div>
+    </header>
+
+    <section class="grid" id="teachersGrid">
+
+      <!-- 教师卡片 1 -->
+      <article class="card" data-teacher="1">
+        <div class="meta">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">张老师</div>
+            <div class="role">中文教师 • HSK教师</div>
+          </div>
+        </div>
+        <div class="bio">专注于零基础入门与发音训练，善于用简单范例帮助学生快速上手。专注于零基础入门与发音训练，善于用简单范例帮助学生快速上手。擅长中文写作与文化教学。</div>
+        <div class="media">
+          <iframe 
+            src="https://video.h5.weibo.cn/1034:4863016739733528/4863019177739716?autoplay=0" 
+            title="张老师自我介绍" 
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen scrolling="no">
+          </iframe>
+        </div>
+        <div class="tools">
+          <a class="btn" href="https://docs.google.com/spreadsheets/d/1ZHvgHnnLAJThdBCnK0LXHNgnNliRdYJOL9anz8C1Ltc/edit?gid=0#gid=0" target="_blank">查看课程时间表</a>
+        </div>
+      </article>
+
+      <!-- 教师卡片 2 -->
+      <article class="card" data-teacher="2">
+        <div class="meta">
+          <div class="avatar">B</div>
+          <div>
+            <div class="name">李老师</div>
+            <div class="role">会话 & 发音</div>
+          </div>
+        </div>
+        <div class="bio">以会话为主，课堂活泼，注重学生口语的流利度与自信。专注于零基础入门与发音训练，善于用简单范例帮助学生快速上手。擅长中文写作与文化教学。</div>
+        <div class="media">
+          <iframe 
+            src="https://video.h5.weibo.cn/1034:4863016739733528/4863019177739716?autoplay=0"
+            title="李老师自我介绍"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen scrolling="no">
+          </iframe>
+        </div>
+        <div class="tools">
+          <a class="btn" href="https://docs.google.com/spreadsheets/d/1ZHvgHnnLAJThdBCnK0LXHNgnNliRdYJOL9anz8C1Ltc/edit?gid=0#gid=0" target="_blank">查看课程时间表</a>
+        </div>
+      </article>
+
+      <!-- 教师卡片 3 -->
+      <article class="card" data-teacher="3">
+        <div class="meta">
+          <div class="avatar">C</div>
+          <div>
+            <div class="name">王老师</div>
+            <div class="role">青少年辅导</div>
+          </div>
+        </div>
+        <div class="bio">擅长青少年学习计划设计，注重兴趣与成绩双提升。专注于零基础入门与发音训练，善于用简单范例帮助学生快速上手。擅长中文写作与文化教学。</div>
+        <div class="media">
+          <iframe 
+            src="https://video.h5.weibo.cn/1034:4863016739733528/4863019177739716?autoplay=0"
+            title="王老师自我介绍"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen scrolling="no">
+          </iframe>
+        </div>
+        <div class="tools">
+          <a class="btn" href="https://docs.google.com/spreadsheets/d/1ZHvgHnnLAJThdBCnK0LXHNgnNliRdYJOL9anz8C1Ltc/edit?gid=0#gid=0" target="_blank">查看课程时间表</a>
+        </div>
+      </article>
+
+      <!-- 教师卡片 4 -->
+      <article class="card" data-teacher="4">
+        <div class="meta">
+          <div class="avatar">D</div>
+          <div>
+            <div class="name">赵老师</div>
+            <div class="role">商务中文</div>
+          </div>
+        </div>
+        <div class="bio">专攻商务汉语与礼仪，拥有跨国企业教学经验。专注于零基础入门与发音训练，善于用简单范例帮助学生快速上手。擅长中文写作与文化教学。</div>
+        <div class="media">
+          <iframe 
+            src="https://video.h5.weibo.cn/1034:4863016739733528/4863019177739716?autoplay=0"
+            title="赵老师自我介绍"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen scrolling="no">
+          </iframe>
+        </div>
+        <div class="tools">
+          <a class="btn" href="https://docs.google.com/spreadsheets/d/1ZHvgHnnLAJThdBCnK0LXHNgnNliRdYJOL9anz8C1Ltc/edit?gid=0#gid=0" target="_blank">查看课程时间表</a>
+        </div>
+      </article>
+
+      <!-- 教师卡片 5 -->
+      <article class="card" data-teacher="5">
+        <div class="meta">
+          <div class="avatar">E</div>
+          <div>
+            <div class="name">陈老师</div>
+            <div class="role">一对一辅导</div>
+          </div>
+        </div>
+        <div class="bio">一对一定制课程，注重诊断与个性化练习。专注于零基础入门与发音训练，善于用简单范例帮助学生快速上手。擅长中文写作与文化教学。</div>
+        <div class="media">
+          <iframe 
+            src="https://video.h5.weibo.cn/1034:4863016739733528/4863019177739716?autoplay=0"
+            title="陈老师自我介绍"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen scrolling="no">
+          </iframe>
+        </div>
+        <div class="tools">
+          <a class="btn" href="GOOGLE_SHEET_LINK_5" target="_blank">查看课程时间表</a>
+        </div>
+      </article>
+
+      <!-- 教师卡片 6 -->
+      <article class="card" data-teacher="6">
+        <div class="meta">
+          <div class="avatar">F</div>
+          <div>
+            <div class="name">刘老师</div>
+            <div class="role">文化与写作</div>
+          </div>
+        </div>
+        <div class="bio">擅长中文写作与文化教学，帮助学生理解语言背后的文化内涵。专注于零基础入门与发音训练，善于用简单范例帮助学生快速上手。擅长中文写作与文化教学。</div>
+        <div class="media">
+          <iframe 
+            src="https://video.h5.weibo.cn/1034:4863016739733528/4863019177739716?autoplay=0"
+            title="刘老师自我介绍"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen scrolling="no">
+          </iframe>
+        </div>
+        <div class="tools">
+          <a class="btn" href="GOOGLE_SHEET_LINK_6" target="_blank">查看课程时间表</a>
+        </div>
+      </article>
+
+    </section>
+
+    <footer>
+      说明：点击“查看课程时间表”将跳转到对应老师的 Google 表格页面，请确保链接已通过“发布到网页”功能公开。
+    </footer>
+  </div>
+</body>
+</html>
