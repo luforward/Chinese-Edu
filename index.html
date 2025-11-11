@@ -8,7 +8,7 @@
     :root {
       --maxw: 1100px;
       --accent: #0b74de;
-      --green: #016957;  /* 顶部与底部墨绿色 */
+      --green: #016957;
       --light-blue: #a7d8ff;
       --light-green: #b2f0b8;
     }
@@ -23,25 +23,22 @@
       min-height: 100vh;
     }
 
-    /* 顶部墨绿色色条 */
-    .top-bar {
+    .top-bar, .bottom-bar {
       background-color: var(--green);
-      height: 50px;
       width: 100%;
     }
 
-    .bottom-bar {
-      background-color: var(--green);
-      height: 20px;
-      width: 100%;
-    }
+    .top-bar { height: 50px; }
+    .bottom-bar { height: 20px; }
 
     .container {
       flex: 1;
+      width: 100%;
       max-width: var(--maxw);
       margin: 0 auto;
       padding: 20px;
       text-align: center;
+      box-sizing: border-box;
     }
 
     header {
@@ -74,35 +71,30 @@
       padding-bottom: 10px;
     }
 
-    /* Footer 链接样式保持与正文一致 */
     footer a {
-      color: inherit;            /* 保持原有文字颜色 */
-      text-decoration: none;     /* 去掉下划线 */
-    }
-
-    footer a:hover {
       color: inherit;
       text-decoration: none;
     }
 
-    /* 中间主体内容 */
     .main-content {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 40px;
+      width: 100%;
     }
 
     .main-logo {
-      width: 400px;
-      height: 300px;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
       border-radius: 10px;
       overflow: hidden;
     }
 
     .main-logo img {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
     }
 
@@ -110,20 +102,22 @@
       font-size: 1.5rem;
       font-weight: 500;
       color: #333333;
-      margin-top: 20px;
+      margin-top: 0px;
     }
 
-    /* 底部两个色块 */
     .blocks {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 50px;
+      gap: 20px;
       flex-wrap: wrap;
+      width: 100%;
+      margin-top: 30px;
     }
 
     .block {
-      width: 250px;
+      flex: 1 1 200px;
+      max-width: 250px;
       height: 150px;
       color: white;
       display: flex;
@@ -133,7 +127,7 @@
       font-weight: 500;
       border-radius: 10px;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 浅色阴影，浮起效果 */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .block:hover {
@@ -141,12 +135,10 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.15);
     }
 
-    .blue {
-      background-color: #7ec8e3;
-    }
+    .blue { background-color: #7ec8e3; }
+    .green { background-color: #a5d6a7; }
 
-  /* 链接样式保持原样（无下划线、颜色不变） */
-    .block.blue a {
+    .block a {
       color: inherit;
       text-decoration: none;
       display: flex;
@@ -156,39 +148,15 @@
       height: 100%;
     }
 
-    .block.blue a:hover {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .green {
-      background-color: #a5d6a7;
-    }
-
-    /* 链接样式保持原样（无下划线、颜色不变） */
-    .block.green a {
-      color: inherit;
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-    }
-
-    .block.green a:hover {
+    .block a:hover {
       text-decoration: none;
       color: inherit;
     }
 
     @media (max-width: 600px) {
-      .brand-title {
-        font-size: 1.5rem;
-      }
-      .block {
-        height: 120px;
-        font-size: 1.2rem;
-      }
+      .brand-title { font-size: 1.3rem; }
+      .block { height: 120px; font-size: 1.2rem; }
+      .blocks { gap: 10px; }
     }
   </style>
 </head>
@@ -202,11 +170,14 @@
     <!-- 中间主体部分 -->
     <div class="main-content">
       <div class="main-logo">
-        <br><br><img src="https://luforward.github.io/Chinese-Edu/lufologo400.jpg" alt="公司Logo">
+        <img src="https://luforward.github.io/Chinese-Edu/lufologo400.jpg" alt="公司Logo"> 
+       <div class="brand-title">你值得信赖的中文课堂。<br>
+       </div>
       </div>
-      <div class="brand-title">你值得信赖的中文课堂。<br><br><br></div>
-
+      
+<br><br><br><br>
       <div class="blocks">
+
         <div class="block blue">
           <a href="teachers.html" target="_blank">我们的课程</a>
         </div>
@@ -218,7 +189,7 @@
 
     <!-- Footer -->
     <footer>
-      <div style="font-weight:600"><br><br><br>LUFORWARD EDUCATION PTE. LTD.</div>
+      <div style="font-weight:600; margin-top:20px;">LUFORWARD EDUCATION PTE. LTD.</div>
       Email: <a href="mailto:luforward216@gmail.com">luforward216@gmail.com</a><br>
       Whatsapp(Tel): +65 89413429<br>
       Facebook: <a href="http://www.facebook.com/share/1BRkMgAfBu/" target="_blank">MsLu Luforward Chinese</a>
