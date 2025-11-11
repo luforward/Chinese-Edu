@@ -53,39 +53,56 @@
       margin-top: 20px;
     }
 
-.founder-left {
-  background-color: #1ABC9C;
-  flex: 1;
-  min-width: 270px;
-  display: flex;
-  justify-content: center; /* 水平靠左 */
-  align-items: flex-start;     /* 垂直靠上 */
-  padding: 5px;               /* 与边缘保持距离 */
-}
+    .founder-left {
+      background-color: #1ABC9C;
+      flex: 1;
+      min-width: 270px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 5px;
+    }
 
-.photo-frame {
-  background-color: #A8E6CF;
-  width: 200px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0; /* 顶部紧贴 */
-}
+    .photo-frame {
+      background-color: #A8E6CF;
+      width: 200px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
 
-.founder-right {
-  background-color: #ffffff;
-  flex: 3;
-  min-width: 320px;
-  padding: 20px 60px; /* 上下左右适当间距 */
-  display: flex;
-  align-items: flex-start; /* 文字顶部对齐照片 */
-  flex-direction: column;  /* 保证文字垂直排列 */
-}
+    .founder-right {
+      background-color: #ffffff;
+      flex: 3;
+      min-width: 320px;
+      padding: 20px 60px;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
     .founder-text {
       font-size: 18px;
       line-height: 1.8;
       color: #333;
+    }
+
+    /* 新增：视频外框样式 */
+    .video-frame {
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+      background-color: #fafafa;
+    }
+
+    .video-frame video {
+      width: 100%;
+      border-radius: 6px;
     }
 
     /* 下半部分：照片展示，每行3张 */
@@ -95,18 +112,19 @@
       gap: 20px;
       margin-top: 40px;
     }
-   .gallery img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;            /* 填满容器 */
-  object-position: right center; /* 保证右边尽量完整显示 */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
-.gallery img:hover {
-  transform: scale(1.05);
-}
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: right center;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
 
     footer {
       margin-top: 40px;
@@ -130,7 +148,6 @@
 
 <body>
   <div class="container">
-    <!-- 原始 Header 保持不变 -->
     <header>
       <div class="logo">
         <img src="https://luforward.github.io/Chinese-Edu/lufologo.jpg" alt="企业Logo">
@@ -144,68 +161,40 @@
       陆孚中文，你值得信赖的中文课堂。
     </div>
 
-   <section class="founder-section">
-  <div class="founder-left">
-    <div class="photo-frame">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/me.jpg" alt="创始人照片">
-    </div>
-  </div>
-  <div class="founder-right">
-    <div class="founder-text">
-      <br>你好，欢迎来到我的页面！<br><br>我是 LuForward 陆孚中文的创始人——陆静艳（Ms. Lu）。<br><br>
+    <section class="founder-section">
+      <div class="founder-left">
+        <div class="photo-frame">
+          <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/me.jpg" alt="创始人照片">
+        </div>
+      </div>
+      <div class="founder-right">
+        <div class="founder-text">
+          <br>你好，欢迎来到我的页面！<br><br>我是 LuForward 陆孚中文的创始人——陆静艳（Ms. Lu）。<br><br>
 
-      “陆”是我的姓氏，也象征着扎根大地、稳健成长；“孚”代表信任。因此，我将“陆孚”作为公司的中文名字，寓意<b>诚信教学、赢得信赖</b>。<br><br>
-      英文名中的 “Forward” 则有“向前”的意思，这也是我对自己的工作要求——<b>积极进取，稳步前行</b>。<br><br>
+          “陆”是我的姓氏，也象征着扎根大地、稳健成长；“孚”代表信任。因此，我将“陆孚”作为公司的中文名字，寓意<b>诚信教学、赢得信赖</b>。<br><br>
+          英文名中的 “Forward” 则有“向前”的意思，这也是我对自己的工作要求——<b>积极进取，稳步前行</b>。<br><br>
 
-      我在新加坡生活已有6年多，从事中文教学已有4年。在教学过程中，我积累了丰富的经验，也非常了解本地学生的学习需求。<br><br>
-      我的学生主要来自新加坡，但由于新加坡是一个多元文化、多种族的社会，这里汇聚了来自世界各地的人才，所以我的学生也来自不同国家和地区。<br><br>
+          我在新加坡生活已有6年多，从事中文教学已有4年。在教学过程中，我积累了丰富的经验，也非常了解本地学生的学习需求。<br><br>
+          我的学生主要来自新加坡，但由于新加坡是一个多元文化、多种族的社会，这里汇聚了来自世界各地的人才，所以我的学生也来自不同国家和地区。<br><br>
 
-      我的课堂风格轻松、亲切，喜欢通过鼓励和互动帮助学生进步。从初学者到进阶学习者，我为不同的学生寻找适合他们的教学方案。<br><br>
+          我的课堂风格轻松、亲切，喜欢通过鼓励和互动帮助学生进步。从初学者到进阶学习者，我为不同的学生寻找适合他们的教学方案。<br><br>
 
-      <b>近年来，中新两国在贸易、投资和文化交流方面日益密切，越来越多的中国企业在新加坡设立总部或分公司，这也快速带动了职场人士学习和提升中文的需求。</b><br><br>
-      受此启发，我诚邀更多优秀的老师加入我们的团队，一起将中文的种子撒向这片热土，撒向全世界！<br><br>
-    </div>
-  </div>
-</section>
-<div style="font-weight:600;text-align: right;font-size:18px;font-style: italic;"><br> 以下为部分课堂图片展示：</div>
-
-    <!-- 下半部分：照片展示 -->
-    <section class="gallery">
- 
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto1.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto2.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto3.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto4.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto5.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto6.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto7.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto8.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto9.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto10.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto11.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto12.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto13.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto14.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto15.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto16.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto17.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto18.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto19.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto20.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto21.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto22.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto23.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto24.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto25.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto26.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto27.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto28.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto29.png">
-      <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/classphoto30.png">
+          <b>近年来，中新两国在贸易、投资和文化交流方面日益密切，越来越多的中国企业在新加坡设立总部或分公司，这也快速带动了职场人士学习和提升中文的需求。</b><br><br>
+          受此启发，我诚邀更多优秀的老师加入我们的团队，一起将中文的种子撒向这片热土，撒向全世界！<br><br>
+        </div>
+ <div style="font-weight:600;text-align: right;font-size:18px;font-style: italic;"><br> 以下为部分课堂展示：</div>
+        <!-- 新增视频框 -->
+        <div class="video-frame">
+          <video controls>
+            <source src="https://luforward.github.io/Chinese-Edu/Mslu-class.mp4" type="video/mp4">
+            您的浏览器不支持视频播放。
+          </video>
+        </div>
+      </div>
     </section>
 
+   
 
-    <!-- Footer 保持不变 -->
     <footer>
       <div style="font-weight:600">LUFORWARD EDUCATION PTE. LTD.</div>
       Email: <a href="mailto:luforward216@gmail.com">luforward216@gmail.com</a><br>
