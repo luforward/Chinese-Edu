@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LuForward陆孚中文 | 首页</title>
+  <style>
+    :root {
+      --maxw: 1100px;
+      --accent: #0b74de;
+      --green: #016957;  /* 顶部与底部墨绿色 */
+      --light-blue: #a7d8ff;
+      --light-green: #b2f0b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0;
+      background: #ffffff;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 顶部墨绿色色条 */
+    .top-bar {
+      background-color: var(--green);
+      height: 50px;
+      width: 100%;
+    }
+  .bottom-bar {
+      background-color: var(--green);
+      height: 20px;
+      width: 100%;
+    }
+
+
+    .container {
+      flex: 1;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .logo {
+      width: 200px;
+      height: 150px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.9rem;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    /* 中间主体内容 */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .main-logo {
+      width: 400px;
+      height: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .main-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #333333;
+      margin-top: 20px;
+    }
+
+      /* 底部两个色块 */
+     .blocks {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .block {
+      width: 250px;
+      height: 150px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6rem;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 浅色阴影，浮起效果 */
+    }
+
+    .block:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .blue {
+      background-color: #7ec8e3;
+    }
+
+    .green {
+      background-color: #a5d6a7;
+    }
+
+
+    @media (max-width: 600px) {
+      .brand-title {
+        font-size: 1.5rem;
+      }
+      .block {
+        height: 120px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 顶部墨绿色色条 -->
+  <div class="top-bar"></div>
+
+  <div class="container">
+    <!-- Header 保持一致 -->
+   
+
+    <!-- 中间主体部分 -->
+    <div class="main-content">
+      <div class="main-logo">
+        <br><br><img src="https://luforward.github.io/Chinese-Edu/lufologo400.jpg" alt="公司Logo">
+      </div>
+     <div class="brand-title">你值得信赖的中文课堂。<br><br><br></div>
+
+
+  <div class="blocks">
+      <div class="block blue">我们的课程</div>
+      <div class="block green">我们的老师</div>
+    </div>
+
+    </div>
+
+    <!-- Footer 保持一致 -->
+    <footer>
+      <div style="font-weight:600"><br><br><br>LUFORWARD EDUCATION PTE. LTD.</div>
+      Email: <a href="mailto:luforward216@gmail.com">luforward216@gmail.com</a><br>
+      Whatsapp(Tel): +65 89413429<br>
+      Facebook: <a href="http://www.facebook.com/share/1BRkMgAfBu/" target="_blank">MsLu Luforward Chinese</a>
+    </footer>
+  </div>
+
+  <!-- 底部墨绿色色条 -->
+  <div class="bottom-bar"></div>
+</body>
+</html>
