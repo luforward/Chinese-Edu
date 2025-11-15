@@ -41,41 +41,6 @@
       box-sizing: border-box;
     }
 
-    header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-top: 10px;
-    }
-
-    .logo {
-      width: 200px;
-      height: 150px;
-      border-radius: 10px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    footer {
-      margin-top: 40px;
-      color: #666;
-      font-size: 0.9rem;
-      text-align: center;
-      padding-bottom: 10px;
-    }
-
-    footer a {
-      color: inherit;
-      text-decoration: none;
-    }
-
     .main-content {
       display: flex;
       flex-direction: column;
@@ -132,11 +97,19 @@
     }
 
     .blue {
-      background-color: #8abc8c; /* 调暗绿色 */
+      background-color: #8abc8c;
     }
 
     .green {
-      background-color: #5eb3d2; /* 调暗蓝色 */
+      background-color: #5eb3d2;
+    }
+
+    /* 新增的浅橙色课程框 */
+    .orange {
+      background-color: #f5b97a;
+      color: white;
+     height: 80px;
+
     }
 
     .block a {
@@ -148,7 +121,7 @@
       flex-direction: column;
       width: 100%;
       height: 100%;
-      padding: 20px 6px; /* 增加边距 */
+      padding: 20px 6px;
       box-sizing: border-box;
       text-align: center;
       transition: transform 0.3s ease, filter 0.3s ease;
@@ -157,11 +130,11 @@
     .block:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-      filter: brightness(1.08); /* 背景稍微亮一点 */
+      filter: brightness(1.08);
     }
 
     .block:hover a {
-      transform: scale(1.05); /* 文字轻微放大 */
+      transform: scale(1.05);
     }
 
     .small-text {
@@ -169,8 +142,13 @@
       font-weight: normal;
       margin-top: 3px;
     }
+  .small-text3 {
+      font-size: 1.5rem;
+      font-weight: normal;
+      margin-top: 3px;
+    }
 
-   .back-button {
+    .back-button {
       background-color: #e2e2e2;
       color: #666666;
       border: none;
@@ -186,7 +164,6 @@
       color: white;
     }
 
-
     @media (max-width: 600px) {
       .brand-title { font-size: 1.3rem; }
       .block { height: 120px; font-size: 1.2rem; }
@@ -196,42 +173,46 @@
 </head>
 
 <body>
-  <!-- 顶部墨绿色色条 -->
   <div class="top-bar"></div>
 
   <div class="container">
 
-    <!-- 中间主体部分 -->
     <div class="main-content">
       <div class="main-logo">
-        <img src="https://luforward.github.io/Chinese-Edu/lufologo400.jpg" alt="公司Logo"> 
-      
+        <img src="https://luforward.github.io/Chinese-Edu/lufologo400.jpg" alt="公司Logo">
       </div>
-    <div class="brand-title">Our courses<br>我们的课程
-       </div>
-      
-<br>
-      <div class="blocks">
 
+      <div class="brand-title">Our courses<br>我们的课程</div>
+
+      <div class="blocks">
         <div class="block blue">
           <a href="BusinessChinese.html" target="_blank">
-            <b>Business Chinese<br>商务汉语<br></b>
-            <span class="small-text">Suitable for professionals with a foundation in Chinese<br> 适合有中文基础的职场人士</span> </a>
+            <b>Business Chinese<br>商务汉语</b>
+            <span class="small-text">Suitable for professionals with a foundation in Chinese<br>适合有中文基础的职场人士</span>
+          </a>
         </div>
 
         <div class="block green">
-          <a href="SpokenChinese.html" target="_blank">    <b> Spoken Chinese<br>汉语口语<br></b>
-            <span class="small-text">Suitable for beginners & who aiming to improve Chinese speaking<br>适合中文初学者、中文口语进阶者</span>
+          <a href="SpokenChinese.html" target="_blank">
+            <b>Spoken Chinese<br>汉语口语</b>
+            <span class="small-text">Suitable for beginners & speaking learners<br>适合中文初学者、中文口语进阶者</span>
           </a>
         </div>
-      </div>
-<br><br><br><br>
-<button class="back-button"  onclick="window.location.href='index.html'">返回上一页</button>
+            </div>
+ <div class="blocks">
+
+  <!-- 新增的浅橙色课程框 -->
+        <div class="block orange" style="max-width: 520px;">
+          <a href="Enrollment.html" target="_blank">
+            <b>课程收费及报名须知<br><span class="small-text3">Course Fees & Enrollment Notes</span></b>
+          </a>
+        </div>
+</div>
+      <br><br><br>
+      <button class="back-button" onclick="window.location.href='index.html'">返回上一页</button>
 
     </div>
 
-
-    <!-- Footer -->
     <footer>
       <div style="font-weight:600; margin-top:20px;">LUFORWARD EDUCATION PTE. LTD.</div>
       Email: <a href="mailto:luforward216@gmail.com">luforward216@gmail.com</a><br>
@@ -240,7 +221,6 @@
     </footer>
   </div>
 
-  <!-- 底部墨绿色色条 -->
   <div class="bottom-bar"></div>
 </body>
 </html>
