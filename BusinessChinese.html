@@ -142,7 +142,25 @@ background-color: lightblue;
   background-color: #4169E1;
   border-radius: 50%;
 }
+.course-link {
+  color: inherit;           /* 保持原有颜色 */
+  text-decoration: none;    /* 不显示下划线 */
+  transition: all 0.25s ease;
+}
 
+.course-link:hover {
+  color: #016957;           /* 变成绿色（与网站主色一致） */
+  font-size: 1.05em;        /* 鼠标移动时字体稍微变大 */
+}
+.course-link2 {
+  color: inherit;           /* 保持原有颜色 */
+  text-decoration: none;    /* 不显示下划线 */
+  transition: all 0.25s ease;
+}
+.course-link2:hover {
+  color: #4169E1;           /* 变成绿色（与网站主色一致） */
+  font-size: 1.05em;        /* 鼠标移动时字体稍微变大 */
+}
     footer {
       margin-top: 40px;
       color: #666;
@@ -220,24 +238,26 @@ background-color: lightblue;
        <div class="founder-title">
 
          <span style="font-size: 1rem;">&nbspIf your Chinese foundation is good:&nbsp&nbsp&nbsp   </span>  <br>
-&nbsp如果你的中文基础不错：
+&nbsp如果你的中文基础不错：<br><span class="small-text2"> &nbsp*点击课程名查看详情 </span>
         </div>
  <div class="founder-text">
-          <br><span class="green-dot"></span> Business Chinese Spoken (30 class hours) <span class="small-text">*opted by most Singaporean professionals<span style="font-size: 20px;">🔥</span><br> </span>
-<span class="green-dot"></span> 商务汉语口语 （30课时）<span class="small-text"> *最多新加坡职场人士选择<span style="font-size: 20px;">🔥</span><br> </span>
+          <br> <a class="course-link" href="busi-spoken.html"><span class="green-dot"></span> Business Chinese Spoken (30 class hours) <span class="small-text">*opted by most Singaporean professionals<span style="font-size: 20px;">🔥</span><br> </span>
+<span class="green-dot"></span> 商务汉语口语 （30课时）<span class="small-text"> *最多新加坡职场人士选择<span style="font-size: 20px;">🔥</span> </span></a><br>
         </div>
  <div class="founder-text">
-          <br><span class="blue-dot"></span> Pragmatic Business Chinese (30 class hours)<span class="small-text">*chosen by professionals in the  financial and international trade sectors<br></span>
-<span class="blue-dot"></span> 求实商务汉语 （30课时)<span class="small-text">  *新加坡金融行业、国际贸易行业人士选择</span><br><br><br>
+          <br><a class="course-link2" href="busi-spoken.html"><span class="blue-dot"></span> Pragmatic Business Chinese (30 class hours)<span class="small-text">*chosen by professionals in the  financial and international trade sectors<br></span>
+<span class="blue-dot"></span> 求实商务汉语 （30课时)<span class="small-text">  *新加坡金融行业、国际贸易行业人士选择</span></a><br><br><br>
         </div>
  <div class="founder-title">
 
          <span style="font-size: 1rem;">  &nbspIf your Chinese foundation is relatively weak: </span>  <br>
- &nbsp如果你的中文基础较弱：
+ &nbsp如果你的中文基础较弱： <br>
+<span class="small-text2"> &nbsp*点击课程名查看详情 </span>
+
         </div>
  <div class="founder-text">
-          <br><span class="green-dot"></span> Basic Business Chinese  （24 class hours)<br>
-<span class="green-dot"></span> 初级商务汉语 （24课时)<br><br>
+          <br><a class="course-link" href="busi-spoken.html"><span class="green-dot"></span> Basic Business Chinese  （24 class hours)<br>
+<span class="green-dot"></span> 初级商务汉语 （24课时)</a><br><br>
         </div>
 
 
