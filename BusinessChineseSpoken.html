@@ -25,7 +25,7 @@
       height: 50px;
       width: 100%;
     }
-  .bottom-bar {
+    .bottom-bar {
       background-color: var(--green);
       height: 20px;
       width: 100%;
@@ -36,7 +36,8 @@
       margin: 28px auto;
       padding: 18px;
     }
-    header {
+  
+  header {
       display: flex;
       align-items: center;
       gap: 14px;
@@ -54,7 +55,8 @@
       object-fit: cover;
       display: block;
     }
-    header h1 {
+  
+   header h1 {
       margin: 0;
       font-size: 1.4rem;
       font-weight: 700;
@@ -101,18 +103,32 @@
 
     .founder-title {
       font-weight:600;
-text-align: left;
-font-size:18px;
-font-style: italic;
-background-color: lightblue;
-padding: 10px
+     text-align: left;
+     font-size:18px;
+     font-style: italic;
+     background-color: lightblue;
+     padding: 10px
     }
 
     .target{
-text-align: left;
-font-size:13px;
-background-color: lightyellow;
-padding: 10px
+     text-align: left;
+     font-size:13px;
+     background-color: lightyellow;
+     padding: 10px
+    }
+
+    .textbook {
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .textbook img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .founder-text {
@@ -120,7 +136,6 @@ padding: 10px
       line-height: 1.8;
       color: #333;
     }
-
 
     .small-text {
       font-size: 0.9rem;
@@ -135,45 +150,27 @@ padding: 10px
       color: #049999;
     }
 
- .green-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: green;
-  border-radius: 50%;
-}
-.blue-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: #4169E1;
-  border-radius: 50%;
-}
-.course-link {
-  color: inherit;           /* 保持原有颜色 */
-  text-decoration: none;    /* 不显示下划线 */
-  transition: all 0.25s ease;
-}
+   .green-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+      background-color: green;
+      border-radius: 50%;
+    }
 
-.course-link:hover {
-  color: #016957;           /* 变成绿色（与网站主色一致） */
-  font-size: 1.05em;        /* 鼠标移动时字体稍微变大 */
-}
-.course-link2 {
-  color: inherit;           /* 保持原有颜色 */
-  text-decoration: none;    /* 不显示下划线 */
-  transition: all 0.25s ease;
-}
-.course-link2:hover {
-  color: #4169E1;           /* 变成绿色（与网站主色一致） */
-  font-size: 1.05em;        /* 鼠标移动时字体稍微变大 */
-}
-    footer {
+   .blue-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4169E1;
+    border-radius: 50%;
+    }
+
+  footer {
       margin-top: 40px;
       color: #666;
       font-size: 0.9rem;
     }
-
     /* Footer 链接样式保持与正文一致 */
     footer a {
       color: inherit;            /* 保持原有文字颜色 */
@@ -203,17 +200,6 @@ padding: 10px
     }
 
 
-    @media (max-width: 768px) {
-      .founder-section {
-        flex-direction: column;
-      }
-      .founder-right {
-        padding: 30px;
-      }
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 
@@ -260,7 +246,7 @@ padding: 10px
 ·Preparing for the future entry into Chinese companies or working in China<br>
 ·为将来进入中国公司或去中国工作做准备<br>
         </div><br>
- <div>
+ <div class="textbook">
           <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/BusinessChineseSpoken.png" alt="Business Chinese">
         </div>
 <br><br>
