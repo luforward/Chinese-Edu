@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LuForward陆孚中文 | Business Chinese Course</title>
+  <style>
+    :root {
+      --maxw: 1100px;
+      --accent: #0b74de;
+      --green: #016957;  /* 顶部与底部墨绿色 */
+      --light-blue: #a7d8ff;
+      --light-green: #b2f0b8;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0;
+      background: #f7f9fb;
+      color: #111;
+    }
+
+    /* 顶部墨绿色色条 */
+    .top-bar {
+      background-color: var(--green);
+      height: 50px;
+      width: 100%;
+    }
+    .bottom-bar {
+      background-color: var(--green);
+      height: 20px;
+      width: 100%;
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin: 28px auto;
+      padding: 18px;
+    }
+  
+  header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo {
+      width: 120px;
+      height: 80px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  
+   header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    /* 上半部分：左右两色块 */
+    .founder-section {
+      display: flex;
+      flex-wrap: wrap;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .founder-left {
+      background-color: #1ABC9C;
+      flex: 1;
+      min-width: 270px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 5px;
+    }
+
+    .photo-frame {
+      background-color: #A8E6CF;
+      width: 200px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    .founder-right {
+      background-color: #ffffff;
+      flex: 3;
+      min-width: 320px;
+      padding: 10px 30px;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .founder-title {
+      font-weight:600;
+     text-align: left;
+     font-size:18px;
+     font-style: italic;
+     background-color: lightblue;
+     padding: 10px
+    }
+
+    .target{
+     text-align: left;
+     font-size:13px;
+     background-color: lightyellow;
+     padding: 10px
+    }
+
+    .founder-text {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .small-text {
+      font-size: 0.9rem;
+      font-weight: normal;
+      margin-top: 3px;
+      color: #f26c28;
+    }
+    .small-text2 {
+      font-size: 0.9rem;
+      font-weight: normal;
+      margin-top: 3px;
+      color: #049999;
+    }
+
+   .green-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+      background-color: green;
+      border-radius: 50%;
+    }
+
+   .blue-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4169E1;
+    border-radius: 50%;
+    }
+
+  footer {
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    /* Footer 链接样式保持与正文一致 */
+    footer a {
+      color: inherit;            /* 保持原有文字颜色 */
+      text-decoration: none;     /* 去掉下划线 */
+    }
+
+    footer a:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+
+  .back-button {
+      background-color: #e2e2e2;
+      color: #666666;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+    }
+
+    .back-button:hover {
+      background-color: #c1dfd2;
+      color: white;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <!-- 顶部墨绿色色条 -->
+  <div class="top-bar"></div>
+
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="https://luforward.github.io/Chinese-Edu/lufologo.jpg" alt="企业Logo">
+      </div>
+      <div style="font-size:1.5rem;font-weight:600">
+        商务汉语课程<br>
+        <div style="margin-left:auto;color:#333333;font-size:1.2rem">Business Chinese Course</div>
+      </div>
+    </header>
+    <div style=" text-align: right;color:#049999;font-size:1rem;">
+      陆孚中文，你值得信赖的中文课堂。
+    </div>
+
+    <section class="founder-section">
+      <div class="founder-left">
+        <div class="photo-frame">
+          <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/busi-pic.jpg" alt="Business Chinese">
+        </div>
+      </div>
+      <div class="founder-right">
+       <div class="founder-title">
+             <span style="font-size: 1rem;">Pinyin Course +Short-term Spoken Chinese Threshold I </span>  <br>
+拼音课程+汉语口语速成入门 I <br>（40 class hours） 
+        </div><br>
+ <div class="target">
+        <b>Suitable for students:<br>
+适合学生：</b><br><br>
+·Who are Chinese beginners<br>
+·中文初学者<br><br>
+·Who have been self-studying Chinese for a few months but don't know how to continue<br>
+·自学中文几个月不知道如何继续学习<br><br>
+·Who want to gain a basic understanding of Chinese<br>
+·想对中文有初步了解<br><br>
+·Who want to learn basic daily Chinese conversation<br>
+·想要学会日常基础中文对话<br>
+        </div><br>
+ <div>
+  <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/Shortterm SpokenChinese1pinyin.png"  width="300" height="300"> 
+         </div>
+
+<br>
+ <div class="footer">
+·Initials<br>
+·声母<br>
+·Finals<br>
+·韵母<br>
+·Tones<br>
+·声调<br>
+·Pronunciation<br>
+·拼读<br>
+·Tone Sandhi<br>
+·变调<br><br>
+       </div>
+ <div class="small-text2">
+          <br>
+*requiring approximately 6 to 8 class hours.<br>
+*约需6至8个课时<br><br> *1 class hour = 1 hour.<br>*1个课时=1个小时 </div>
+<br>
+<br>
+ <div>
+ <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/Shortterm SpokenChinese1.png"  width="300" height="300">
+         </div>
+ <div class="footer">
+Lesson1 Hello<br>
+第1课 你好<br><br>
+Lesson 2 How are you?<br>
+第2课 你好吗<br><br>
+Lesson 3 What would you like to eat?<br>
+第3课 你吃什么<br><br>
+Lesson 4 How much does it cost?<br>
+第4课 多少钱<br><br>
+Lesson 5 Where is the library?<br>
+第5课 图书馆在哪儿<br><br>
+Lesson 6 Let me introduce it to you.<br>
+第6课 我来介绍一下<br><br>
+Lesson 7 How are you feeling?<br>
+第7课 你身体好吗<br><br>
+Lesson 8 What country are you from?<br>
+第8课 你是哪国人<br><br>
+Lesson 9 How many people are in your family?<br>
+第9课 你家有几口人<br><br>
+Lesson 10 What time is it now?<br>
+第10课 现在几点<br><br>
+Lesson 11 The office building is to the north of the teaching building.<br>
+第11课 办公楼在的教学楼北边<br><br>
+Lesson 12 Red or blue?<br>
+第12课 要红的还是要蓝的<br><br>
+Lesson 13 Please give me your advice.<br>
+第13课 您给我介绍介绍<br><br>
+Lesson 14 Shall we go try it?<br>
+第14课 咱们去尝尝，好吗<br><br>
+Lesson 15 How to get to the post office?<br>
+第15课 去邮局怎么走<br><br>
+<br>
+       </div>
+
+
+ <div class="small-text2">
+          <br>
+*15 texts, each requiring approximately 2 class hours.<br>
+*课文15篇  每篇约需2个课时<br><br> *1 class hour = 1 hour.<br>*1个课时=1个小时
+<br>
+<br><br><br>
+        </div>
+<div>
+<button class="back-button"  onclick="window.location.href='SpokenChinese.html'" >返回上一页</button>
+ </div>
+
+    </section>
+
+
+    <footer>
+      <div style="font-weight:600">LUFORWARD EDUCATION PTE. LTD.</div>
+      Email: <a href="mailto:luforward216@gmail.com">luforward216@gmail.com</a><br>
+      Whatsapp(Tel): +65 89413429<br>
+      Facebook: <a href="http://www.facebook.com/share/1BRkMgAfBu/" target="_blank">MsLu Luforward Chinese</a>
+    </footer>
+  </div>
+
+  <!-- 底部墨绿色色条 -->
+  <div class="bottom-bar"></div>
+
+</body>
+</html>
