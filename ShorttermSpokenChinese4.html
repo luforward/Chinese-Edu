@@ -25,7 +25,7 @@
       height: 50px;
       width: 100%;
     }
-  .bottom-bar {
+    .bottom-bar {
       background-color: var(--green);
       height: 20px;
       width: 100%;
@@ -36,7 +36,8 @@
       margin: 28px auto;
       padding: 18px;
     }
-    header {
+  
+  header {
       display: flex;
       align-items: center;
       gap: 14px;
@@ -54,7 +55,8 @@
       object-fit: cover;
       display: block;
     }
-    header h1 {
+  
+   header h1 {
       margin: 0;
       font-size: 1.4rem;
       font-weight: 700;
@@ -98,13 +100,21 @@
       align-items: flex-start;
       flex-direction: column;
     }
+
     .founder-title {
       font-weight:600;
-      text-align: left;
-      font-size:18px;
-      font-style: italic;
-      background-color: lightblue;
-      padding: 10px
+     text-align: left;
+     font-size:18px;
+     font-style: italic;
+     background-color: lightblue;
+     padding: 10px
+    }
+
+    .target{
+     text-align: left;
+     font-size:13px;
+     background-color: lightyellow;
+     padding: 10px
     }
 
     .founder-text {
@@ -125,50 +135,28 @@
       margin-top: 3px;
       color: #049999;
     }
-    .small-text3 {
-      font-size: 0.8rem;
-      font-weight: normal;
-      color: #049999;
-    }
-.green-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: green;
-  border-radius: 50%;
-}
-.blue-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: #4169E1;
-  border-radius: 50%;
-}
-.course-link {
-  color: inherit;           /* 保持原有颜色 */
-  text-decoration: none;    /* 不显示下划线 */
-  transition: all 0.25s ease;
-}
 
-.course-link:hover {
-  color: #016957;           /* 变成绿色（与网站主色一致） */
-  font-size: 1.05em;        /* 鼠标移动时字体稍微变大 */
-}
-.course-link2 {
-  color: inherit;           /* 保持原有颜色 */
-  text-decoration: none;    /* 不显示下划线 */
-  transition: all 0.25s ease;
-}
-.course-link2:hover {
-  color: #4169E1;           /* 变成绿色（与网站主色一致） */
-  font-size: 1.05em;        /* 鼠标移动时字体稍微变大 */
-}
-    footer {
+   .green-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+      background-color: green;
+      border-radius: 50%;
+    }
+
+   .blue-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4169E1;
+    border-radius: 50%;
+    }
+
+  footer {
       margin-top: 40px;
       color: #666;
       font-size: 0.9rem;
     }
-
     /* Footer 链接样式保持与正文一致 */
     footer a {
       color: inherit;            /* 保持原有文字颜色 */
@@ -197,17 +185,7 @@
       color: white;
     }
 
-    @media (max-width: 768px) {
-      .founder-section {
-        flex-direction: column;
-      }
-      .founder-right {
-        padding: 30px;
-      }
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-    }
+
   </style>
 </head>
 
@@ -236,55 +214,63 @@
         </div>
       </div>
       <div class="founder-right">
-        <div class="founder-title">
-         <span style="font-size: 1rem;">
-If you have no prior knowledge of Chinese or are a beginner:  </span> <br>
-如果你是零基础或初学者：<br><span class="small-text3"> *Click on the course name to view details.  <br>*点击课程名查看详情 </span>
+       <div class="founder-title">
+             <span style="font-size: 1rem;">Short-term Spoken Chinese Elementary II </span>  <br>
+汉语口语速成基础 II  <br>（40 class hours） 
+        </div><br>
+ <div class="target">
+        <b>Suitable for students:<br>
+适合学生：</b><br><br>
+·who have studied Chinese for two to two and a half years or more <br>
+·学习中文两年或两年半以上的学生<br><br>
+·who want to further improve their basic daily Chinese conversational skills<br>
+·想要继续提高日常基础中文对话水平<br><br>
+·who want to master common Chinese grammar and sentence patterns<br>
+·想要掌握常见中文语法和句型<br>
+        </div><br>
+ 
+ <div>
+ <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/Shortterm SpokenChinese4.png"  width="300" height="300">
+         </div>
+ <div class="footer">
+Lesson 13 Returning from a Trip<br>
+第13课 旅行归来<br><br>
+Lesson 14 Physical Fitness<br>
+第14课 体育健身<br><br>
+Lesson 15 To Each Their Own Taste<br>
+第15课 各有所爱<br><br>
+Lesson 16 An Ideal Career<br>
+第16课 理想的职业<br><br>
+Lesson 17 Hobbies<br>
+第17课 业余爱好<br><br>
+Lesson 18 Chinese Families<br>
+第18课 中国家庭<br><br>
+Lesson 19 Visiting a Sick Person<br>
+第19课 看望病人<br><br>
+Lesson 20 Lifestyle Habits<br>
+第20课 生活习惯<br><br>
+Lesson 21 Watching a Game<br>
+第21课 看比赛<br><br>
+Lesson 22 Spring, Summer, Autumn, and Winter<br>
+第22课 春夏秋冬<br><br>
+Lesson 23 Friendly Interactions<br>
+第23课 友好交往<br><br>
+Lesson 24 How Did You Do on Your Exam?<br>
+第24课 你考得怎么样<br><br>
 
-        </div>
- <div class="founder-text">
-          <br><a class="course-link2" href="ShorttermSpokenChinese1.html"><span class="blue-dot"></span> Pinyin Course +Short-term Spoken Chinese Threshold I   (40 class hours) <span style="font-size: 20px;">🔥</span> <br>
-<span class="blue-dot"></span>  拼音课程+汉语口语速成入门 I    (40课时)<span style="font-size: 20px;">🔥</span></a>
-        </div>
- <div class="founder-text">
-          <br><a class="course-link" href="Chinesecharacters.html"><span class="green-dot"></span> Chinese Character Reinforcement Course  (30 class hours)  <br>
-<span class="green-dot"></span> 汉字强化课程    (30课时)</a>
-<br><br><br>
-        </div>
 
-
-   <div class="founder-title">
-         <span style="font-size: 1rem;">If you have been learning Chinese for more than one year:  </span><br>
-如果你学习中文一年以上：<br><span class="small-text3"> *Click on the course name to view details.  <br>*点击课程名查看详情 </span>
-        </div>
- <div class="founder-text">
-          <br><a class="course-link2" href="ShorttermSpokenChinese2.html"><span class="blue-dot"></span> Short-term Spoken Chinese Threshold II    (36 class hours)<br>
-<span class="blue-dot"></span> 汉语口语速成入门 II   (40课时)</a><br><br><br>
-        </div>
-
-
- <div class="founder-title">
-         <span style="font-size: 1rem;">If you have been learning Chinese for more than two years:  </span><br>
-如果你学习中文两年以上：<br><span class="small-text3"> *Click on the course name to view details.  <br>*点击课程名查看详情 </span>
-        </div>
- <div class="founder-text">
-          <br><a class="course-link2" href="ShorttermSpokenChinese3.html"><span class="blue-dot"></span> Short-term Spoken Chinese Elementary I   (40 class hours)<br>
-<span class="blue-dot"></span> 汉语口语速成基础 I   (40课时)</a><br>
-        </div>
- <div class="founder-text">
-          <br><a class="course-link" href="ShorttermSpokenChinese4.html"><span class="green-dot"></span> Short-term Spoken Chinese Elementary II  (40 class hours)<br>
-<span class="green-dot"></span> 汉语口语速成基础 II   (40课时)</a><br><br>
-        </div>
-
+       </div>
 
 
  <div class="small-text2">
-          <br>*1 class hour = 1 hour.<br>*1个课时=1个小时
+          <br>
+*12 texts, each requiring approximately 3 class hours.<br>
+*课文12篇  每篇约需3个课时<br><br> *1 class hour = 1 hour.<br>*1个课时=1个小时
 <br>
-<br><br><br><br>
+<br><br><br>
         </div>
-<div style=" text-align: right;">
-<button class="back-button" onclick="window.location.href='ourcourses.html'" >返回上一页</button>
+<div>
+<button class="back-button"  onclick="window.location.href='SpokenChinese.html'" >返回上一页</button>
  </div>
 
     </section>
