@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LuForward陆孚中文 | Course Fees & Enrollment Notes</title>
+
+  <style>
+    :root {
+      --maxw: 1100px;
+      --green: #016957;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0;
+      background: #f7f9fb;
+      color: #111;
+    }
+
+    /* 顶部、底部墨绿色色条 */
+    .top-bar, .bottom-bar {
+      background-color: var(--green);
+      width: 100%;
+    }
+    .top-bar { height: 50px; }
+    .bottom-bar { height: 20px; }
+
+    .container {
+      max-width: var(--maxw);
+      margin: 28px auto;
+      padding: 18px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 120px;
+      height: 80px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 上半部分：左右两色块 */
+    .founder-section {
+      display: flex;
+      flex-wrap: wrap;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .founder-left {
+      background-color: #1ABC9C;
+      flex: 1;
+      min-width: 270px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 5px;
+    }
+
+    .photo-frame {
+      background-color: #A8E6CF;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .founder-right {
+      background-color: #ffffff;
+      flex: 3;
+      min-width: 320px;
+      padding: 10px 30px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .founder-title {
+      font-weight:600;
+      font-size:18px;
+      font-style: italic;
+      background-color: #f5b97a;
+      text-align:left;
+      padding-left:6px;
+    }
+
+    .founder-text {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .small-text3 {
+      font-size: 1rem;
+      margin-top: 3px;
+      color: #333333;
+      line-height: 1.6;
+    }
+
+    /* 去掉所有链接下划线（正文 & footer 统一处理） */
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.25s ease;
+    }
+
+    a:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* 返回按钮 */
+    .back-button {
+      background-color: #e2e2e2;
+      color: #666666;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #c1dfd2;
+      color: white;
+    }
+
+    /* 手机样式 */
+    @media (max-width: 768px) {
+      .founder-section {
+        flex-direction: column;
+      }
+      .founder-right {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar"></div>
+
+  <div class="container">
+
+    <header>
+      <div class="logo">
+        <img src="https://luforward.github.io/Chinese-Edu/lufologo.jpg" alt="企业Logo">
+      </div>
+
+      <div style="font-size:1.5rem;font-weight:600">
+        About Us<br>
+        <div style="color:#333333;font-size:1.2rem">关于我们</div>
+      </div>
+    </header>
+
+    <section class="founder-section">
+
+      <div class="founder-left">
+        <div class="photo-frame">
+          <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/aboutus-pic.jpg">
+        </div>
+      </div>
+
+      <div class="founder-right">
+
+        <div class="founder-text">
+          LuForward Chinese 陆孚中文 is a Singapore-based local company dedicated to providing high-quality online Chinese language courses for adult learners in Singapore.<br><br>
+
+          All our teachers are native Chinese speakers with a strong linguistic foundation and solid bilingual abilities in both Chinese and English. They have years of experience in the education sector or relevant professional fields. At the same time, they are familiar with Singapore’s education system, local culture, and workplace environment, enabling them to design and deliver localized Chinese courses tailored to the needs of learners in Singapore.<br><br><br>
+        </div>
+
+        <div class="founder-title">
+          <span style="font-size: 1rem;">&nbsp;Contact us:</span><br>
+        </div>
+
+        <div class="small-text3">
+          LUFORWARD EDUCATION PTE. LTD. <br>
+          Whatsapp(Tel): +65 89413429<br>
+          Email: <a href="mailto:luforward216@gmail.com">luforward216@gmail.com</a><br>
+          Facebook: <a href="http://www.facebook.com/share/1BRkMgAfBu/" target="_blank">Luforward Chinese</a>
+        </div>
+
+        <br><br><br><br><br><br><br><br>
+
+        <div style="text-align: right;">
+          <button class="back-button" onclick="window.location.href='index.html'">返回上一页</button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="bottom-bar"></div>
+
+</body>
+</html>
