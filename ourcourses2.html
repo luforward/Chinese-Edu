@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LuForward陆孚中文 | Our Online Courses</title> 
+  <style>
+    :root {
+      --maxw: 1100px;
+      --accent: #0b74de;
+      --green: #016957;
+      --light-blue: #7ec8e3;
+      --light-green: #a5d6a7;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0;
+      background: #ffffff;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .top-bar, .bottom-bar {
+      background-color: var(--green);
+      width: 100%;
+    }
+
+    .top-bar { height: 50px; }
+    .bottom-bar { height: 20px; }
+
+    .container {
+      flex: 1;
+      width: 100%;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+  footer {
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.9rem;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    .main-logo {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .main-logo img {
+      width: 70%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #333333;
+      margin-top: 0px;
+    }
+
+    .blocks {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .block {
+      flex: 1 1 200px;
+      max-width: 250px;
+      height: 150px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6rem;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+
+    .blue {
+      background-color: #8abc8c;
+    }
+
+    .green {
+      background-color: #5eb3d2;
+    }
+
+    /* 新增的浅橙色课程框 */
+    .orange {
+      background-color: #f5b97a;
+      color: white;
+     height: 70px;
+
+    }
+
+    .block a {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 20px 6px;
+      box-sizing: border-box;
+      text-align: center;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .block:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      filter: brightness(1.08);
+    }
+
+    .block:hover a {
+      transform: scale(1.05);
+    }
+
+    .small-text {
+      font-size: 0.8rem;
+      font-weight: normal;
+      margin-top: 3px;
+    }
+  .small-text3 {
+      font-size: 0.9rem;
+      font-weight: normal;
+      margin-top: 3px;
+    }
+ .small-text4 {
+      font-size: 1.2rem;
+      font-weight: normal;
+      margin-top: 3px;
+    }
+
+
+    .back-button {
+      background-color: #e2e2e2;
+      color: #666666;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #c1dfd2;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      .brand-title { font-size: 1.3rem; }
+      .block { height: 120px; font-size: 1.2rem; }
+      .blocks { gap: 10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar"></div>
+
+  <div class="container">
+
+    <div class="main-content">
+      <div class="main-logo">
+        <img src="https://luforward.github.io/Chinese-Edu/lufologo400.jpg" alt="公司Logo">
+      </div>
+
+      <div class="brand-title">Our Online Courses<br>我们的在线课程</div>
+
+      <div class="blocks">
+        <div class="block blue">
+          <a href="BusinessChinese.html" target="_blank">
+            <b>Business Chinese<br>商务汉语</b>
+            <span class="small-text">Suitable for professionals with a foundation in Chinese<br>适合有中文基础的职场人士</span>
+          </a>
+        </div>
+
+        <div class="block green">
+          <a href="SpokenChinese.html" target="_blank">
+            <b>Spoken Chinese<br>汉语口语</b>
+            <span class="small-text">Suitable for beginners & speaking learners<br>适合中文初学者、中文口语进阶者</span>
+          </a>
+        </div>
+            </div>
+ <div class="blocks">
+
+  <!-- 新增的浅橙色课程框 -->
+        <div class="block orange" style="max-width: 250px;">
+          <a href="Enrollment.html" target="_blank">
+           <span class="small-text3"><b>Course Fees & Enrollment Notes</b></span> <span class="small-text4">课程收费及报名须知</span>
+          </a>
+        </div>
+</div>
+      <br>
+
+    </div>
+
+    <footer>
+      <div style="font-weight:600; margin-top:20px;">LUFORWARD EDUCATION PTE. LTD.</div>
+      Email: <a href="mailto:luforward216@gmail.com">luforward216@gmail.com</a><br>
+      Whatsapp(Tel): +65 89413429<br>
+      Facebook: <a href="http://www.facebook.com/share/1BRkMgAfBu/" target="_blank">MsLu Luforward Chinese</a>
+    </footer>
+  </div>
+
+  <div class="bottom-bar"></div>
+</body>
+</html>
