@@ -25,7 +25,7 @@
       height: 50px;
       width: 100%;
     }
-  .bottom-bar {
+    .bottom-bar {
       background-color: var(--green);
       height: 20px;
       width: 100%;
@@ -36,7 +36,8 @@
       margin: 28px auto;
       padding: 18px;
     }
-    header {
+  
+  header {
       display: flex;
       align-items: center;
       gap: 14px;
@@ -54,7 +55,8 @@
       object-fit: cover;
       display: block;
     }
-    header h1 {
+  
+   header h1 {
       margin: 0;
       font-size: 1.4rem;
       font-weight: 700;
@@ -101,20 +103,25 @@
 
     .founder-title {
       font-weight:600;
-      text-align: left;
-      font-size:18px;
-      font-style: italic;
-      background-color: lightblue;
-      padding: 10px
+     text-align: left;
+     font-size:18px;
+     font-style: italic;
+     background-color: lightblue;
+     padding: 10px
     }
 
+    .target{
+     text-align: left;
+     font-size:13px;
+     background-color: lightyellow;
+     padding: 10px
+    }
 
     .founder-text {
       font-size: 18px;
       line-height: 1.8;
       color: #333;
     }
-
 
     .small-text {
       font-size: 0.9rem;
@@ -128,50 +135,28 @@
       margin-top: 3px;
       color: #049999;
     }
-    .small-text3 {
-      font-size: 0.8rem;
-      font-weight: normal;
-      color: #049999;
-    }
- .green-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: green;
-  border-radius: 50%;
-}
-.blue-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: #4169E1;
-  border-radius: 50%;
-}
-.course-link {
-  color: inherit;           /* 保持原有颜色 */
-  text-decoration: none;    /* 不显示下划线 */
-  transition: all 0.25s ease;
-}
 
-.course-link:hover {
-  color: #016957;           /* 变成绿色（与网站主色一致） */
-  font-size: 1.02em;        /* 鼠标移动时字体稍微变大 */
-}
-.course-link2 {
-  color: inherit;           /* 保持原有颜色 */
-  text-decoration: none;    /* 不显示下划线 */
-  transition: all 0.25s ease;
-}
-.course-link2:hover {
-  color: #4169E1;           /* 变成绿色（与网站主色一致） */
-  font-size: 1.02em;        /* 鼠标移动时字体稍微变大 */
-}
-    footer {
+   .green-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+      background-color: green;
+      border-radius: 50%;
+    }
+
+   .blue-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4169E1;
+    border-radius: 50%;
+    }
+
+  footer {
       margin-top: 40px;
       color: #666;
       font-size: 0.9rem;
     }
-
     /* Footer 链接样式保持与正文一致 */
     footer a {
       color: inherit;            /* 保持原有文字颜色 */
@@ -200,18 +185,6 @@
       color: white;
     }
 
-
-    @media (max-width: 768px) {
-      .founder-section {
-        flex-direction: column;
-      }
-      .founder-right {
-        padding: 30px;
-      }
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 
@@ -229,7 +202,6 @@
         <div style="margin-left:auto;color:#333333;font-size:1.2rem">Business Chinese Course</div>
       </div>
     </header>
- 
 
     <section class="founder-section">
       <div class="founder-left">
@@ -239,51 +211,35 @@
       </div>
       <div class="founder-right">
        <div class="founder-title">
-<span style="font-size: 1rem;">If your Chinese foundation is good:</span>  <br>
-如果你的中文基础不错：<br><span class="small-text3"> *Click on the course name to view details.  <br>*点击课程名查看详情 </span>
-           </div>
- <div class="founder-text">
-          <br> <a class="course-link" href="BusinessChineseSpoken.html"><span class="green-dot"></span> Business Chinese Spoken Intermediate  (45 class hours) <span class="small-text">*opted by most Singaporean professionals<span style="font-size: 20px;">🔥</span><br> </span>
-<span class="green-dot"></span> 商务汉语中级口语 （45课时）<span class="small-text"> *最多新加坡职场人士选择<span style="font-size: 20px;">🔥</span> </span></a><br>
-        </div>
- <div class="founder-text">
-          <br><a class="course-link2" href="BusinessChinesePragmatic.html"><span class="blue-dot"></span> Pragmatic Business Chinese (30 class hours)<span class="small-text">*chosen by professionals in the  financial and international trade sectors<br></span>
-<span class="blue-dot"></span> 求实商务汉语 （30课时)<span class="small-text">  *新加坡金融行业、国际贸易行业人士选择</span></a><br>
-        </div>
- <div class="founder-text">
-          <br><a class="course-link2" href="AdvancedCustomizedChinese.html"><span class="green-dot"></span> Advanced Customized Business Chinese ( Minimum 10 class hours )<br>
-<span class="green-dot"></span> 高级定制商务汉语（至少10课时)</a><br><br><br>
-        </div>
-
-
- <div class="founder-title">
-
-         <span style="font-size: 1rem;">  &nbspIf your Chinese foundation is relatively weak: </span>  <br>
-如果你的中文基础较弱： <br>
-<span class="small-text3"> *Click on the course name to view details.  <br>*点击课程名查看详情 </span>
-
-        </div>
- <div class="founder-text">
-          <br><a class="course-link" href="ElementaryBusinessChinese1.html"><span class="green-dot"></span> Elementary Business Chinese I （15 class hours)<br>
-<span class="green-dot"></span> 初级商务汉语 I （15课时)</a>
-        </div>
- <div class="founder-text">
-          <br><a class="course-link" href="ElementaryBusinessChinese2.html"><span class="blue-dot"></span> Elementary Business Chinese II （20 class hours)<br>
-<span class="blue-dot"></span> 初级商务汉语 II （20课时)</a><br><br>
-        </div>
-
-
- <div class="small-text2">
-          <br>*1 class hour = 1 hour.<br>*1个课时=1个小时
-
+             <span style="font-size: 1rem;">Advanced Customized Business Chinese</span>  <br>
+高级定制商务汉语<br>( Minimum 10 class hours ) 
+        </div><br>
+ <div class="target">
+<b>Suitable for students:<br>
+适合学生：</b><br><br>
+·For Singaporean Chinese students, passing the O-level is a solid foundation for your study of this course<br>
+·新加坡华人学生，通过Olevel华文考试是你学习这门课程坚实的基础<br><br>
+·Chinese learners who have passed the HSK6 level<br>
+·通过HSK6级的中文学习者<br><br>
+·Engaging in international trade，finance, law, medicine，markerting,etc. professional industries<br>
+·从事国际贸易、金融、法律、医务、市场营销等专业行业<br><br></div><br>
+ <div>
+  <img src="https://raw.githubusercontent.com/luforward/Chinese-Edu/refs/heads/main/AdvancedCustomizedChinese.png"  width="450" height="300">
+         </div>
 <br>
-<br><br>       </div>
+ <div class="footer">
+Find the content and topics you want to learn, and have a pleasant study session with your teacher. Believe that during this process, you'll definitely spark many new ideas and insights into language learning with your teacher.:)<br>
+找到你想学习的内容和话题，和老师一起愉快的学习吧。相信在这个过程中，你一定能和老师擦出很多很多语言学习的小火花。<br><br>
+<br>
+<b><span style="background-color: lightyellow;">Tuition Fee: $45-55/hr<span class="small-text">（The fees will vary depending on the different teachers.）</span><br></span> </b> 
+<br><br>
+        </div>
+
 <div>
-<button class="back-button"  onclick="window.location.href='ourcourses.html'" >返回上一页</button>
+<button class="back-button"  onclick="window.location.href='BusinessChinese.html'" >返回上一页</button>
  </div>
 
     </section>
-
 
     <footer>
       <div style="font-weight:600">LUFORWARD EDUCATION PTE. LTD.</div>
