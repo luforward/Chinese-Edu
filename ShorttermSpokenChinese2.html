@@ -152,21 +152,62 @@
     border-radius: 50%;
     }
 
-  footer {
-      margin-top: 40px;
+   footer {
+      margin-top: 30px;
       color: #666;
       font-size: 0.9rem;
-    }
-    /* Footer 链接样式保持与正文一致 */
-    footer a {
-      color: inherit;            /* 保持原有文字颜色 */
-      text-decoration: none;     /* 去掉下划线 */
+      text-align: center;
+      
     }
 
-    footer a:hover {
+    footer a {
       color: inherit;
       text-decoration: none;
     }
+
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 18px;
+    }
+
+    .footer-icon {
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-icon img {
+      width: 25px;
+      height: 25px;
+      transition: transform 0.2s ease;
+    }
+
+    .footer-icon:hover img {
+      transform: scale(1.15);
+    }
+
+    /* Tooltip */
+    .footer-icon span {
+      position: absolute;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--brand);
+      color: #fff;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-icon:hover span {
+      opacity: 1;
+    }
+
 
   .back-button {
       background-color: #e2e2e2;
@@ -196,7 +237,8 @@
   <div class="container">
     <header>
       <div class="logo">
-        <img src="https://luforward.github.io/Chinese-Edu/lufologo.jpg" alt="企业Logo">
+  <a  href="http://www.luforward.com">
+        <img src="https://luforward.github.io/Chinese-Edu/lufologo.jpg" ></a>
       </div>
       <div style="font-size:1.5rem;font-weight:600">
         汉语口语课程<br>
@@ -275,12 +317,48 @@ Lesson 30 Bon voyage<br>
     </section>
 
 
+     <!-- Footer -->
     <footer>
-      <div style="font-weight:600">LUFORWARD EDUCATION PTE. LTD.</div>
-      Email: <a href="mailto:luforward216@gmail.com">luforward216@gmail.com</a><br>
-      Whatsapp(Tel): +65 89413429<br>
-      Facebook: <a href="http://www.facebook.com/share/1BRkMgAfBu/" target="_blank">MsLu Luforward Chinese</a>
-    </footer>
+
+ <div style="font-weight:500; margin-top:20px;">LUFORWARD EDUCATION PTE. LTD.</div>
+
+     <!-- ✅ 品牌色图标 -->
+
+   <div class="footer-icons">
+
+  <a class="footer-icon"
+     href="https://wa.me/6589413429"
+     target="_blank">
+    <img src="https://api.iconify.design/logos:whatsapp-icon.svg" alt="WhatsApp">
+    <span>WhatsApp</span>
+  </a>
+
+  <a class="footer-icon"
+     href="mailto:luforward216@gmail.com">
+    <img src="https://api.iconify.design/logos:google-gmail.svg" alt="Email">
+    <span>Email</span>
+  </a>
+
+  <a class="footer-icon"
+     href="http://www.facebook.com/share/1BRkMgAfBu/"
+     target="_blank">
+    <img src="https://api.iconify.design/logos:facebook.svg" alt="Facebook">
+    <span>Facebook</span>
+  </a>
+
+  <!-- ✅ 小红书（已修复） -->
+  <a class="footer-icon"
+     href="https://xhslink.com/m/5kGprfkJ2XV"
+     target="_blank">
+   <img src="https://api.iconify.design/simple-icons:xiaohongshu.svg?color=%23FF2442"
+     alt="小红书">
+    <span>小红书</span>
+  </a>
+
+</div>
+
+  </footer>
+
   </div>
 
   <!-- 底部墨绿色色条 -->
