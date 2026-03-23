@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章拼音双语生成器</title>
+    <script src="https://unpkg.com/pinyin-pro"></script>
+    <style>
+        :root {
+            --primary-color: #007AFF;
+            --bg-color: #f5f5f7;
+            --card-bg: #ffffff;
+            --text-pinyin: #6e6e73;
+            --text-chinese: #1d1d1f;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-chinese);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* 输入区 */
+        .input-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.6;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        button:hover { background-color: #0056b3; }
+        button:active { transform: scale(0.99); }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* 展示区 */
+        #output {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            min-height: 100px;
+        }
+
+        .segment {
+            margin-bottom: 35px;
+        }
+
+        .pinyin {
+            color: var(--text-pinyin);
+            font-size: 1rem;
+            margin-bottom: 2px;
+            letter-spacing: 0.05em;
+        }
+
+        .chinese {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #000;
+        }
+
+        .english {
+            color: var(--primary-color);
+            font-style: italic;
+            font-size: 1rem;
+            min-height: 1.2em;
+            transition: opacity 0.3s;
+        }
+
+        .loading-text {
+            color: #bbb;
+            font-size: 0.9em;
+            font-style: normal;
+        }
+
+        /* 打印适配 */
+        @media print {
+            .input-card, h1 { display: none; }
+            body { padding: 0; background: white; }
+            #output { box-shadow: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>文章拼音双语生成器</h1>
+
+    <div class="input-card">
+        <textarea id="articleInput" placeholder="在此粘贴你的中文文章..."></textarea>
+        <button id="submitBtn" onclick="generateDisplay()">提交文章并排版</button>
+    </div>
+
+    <div id="output">
+        <div style="text-align: center; color: #ccc; padding-top: 20px;">内容生成区</div>
+    </div>
+</div>
+
+<script>
+    const { pinyin } = pinyinPro;
+
+    // 免费翻译接口 (Google Translate GTX)
+    async function translateText(text) {
+        if (!text.trim()) return "";
+        try {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=zh-CN&tl=en&dt=t&q=${encodeURIComponent(text)}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            // 拼接所有可能的翻译片段
+            return data[0].map(item => item[0]).join('');
+        } catch (error) {
+            console.error("翻译请求失败:", error);
+            return "Translation service unavailable.";
+        }
+    }
+
+    async function generateDisplay() {
+        const input = document.getElementById('articleInput').value.trim();
+        const output = document.getElementById('output');
+        const btn = document.getElementById('submitBtn');
+        
+        if (!input) {
+            alert("请输入内容");
+            return;
+        }
+
+        // 状态初始化
+        btn.disabled = true;
+        btn.innerText = "正在智能排版中...";
+        output.innerHTML = ''; 
+
+        // 1. 智能切分逻辑
+        // 匹配：句末标点、换行、闭合引号、闭合括号
+        const rawSegments = input.split(/([。！？\n”"』）])/).filter(s => s !== undefined && s !== '');
+        
+        // 2. 粘连逻辑处理
+        let sentences = [];
+        for (let i = 0; i < rawSegments.length; i++) {
+            const part = rawSegments[i];
+            // 如果是标点或闭合符号，粘到上一句
+            if (/[。！？\n”"』）]/.test(part) && sentences.length > 0) {
+                sentences[sentences.length - 1] += part;
+            } else {
+                sentences.push(part);
+            }
+        }
+
+        // 3. 循环渲染
+        for (let sentence of sentences) {
+            const cleanSentence = sentence.trim();
+            if (!cleanSentence) continue;
+
+            // 生成拼音
+            const pinyinText = pinyin(cleanSentence, { 
+                toneType: 'symbol', 
+                type: 'string',
+                nonZh: 'consecutive' 
+            });
+
+            // 创建显示块
+            const segment = document.createElement('div');
+            segment.className = 'segment';
+            const translationId = "en-" + Math.random().toString(36).substr(2, 9);
+            
+            segment.innerHTML = `
+                <div class="pinyin">${pinyinText}</div>
+                <div class="chinese">${cleanSentence}</div>
+                <div id="${translationId}" class="english"><span class="loading-text">正在翻译...</span></div>
+            `;
+            output.appendChild(segment);
+
+            // 异步触发翻译，不阻塞后续句子的拼音渲染
+            translateText(cleanSentence).then(translated => {
+                const el = document.getElementById(translationId);
+                if (el) el.innerText = translated;
+            });
+        }
+
+        // 恢复按钮
+        btn.disabled = false;
+        btn.innerText = "提交文章并排版";
+    }
+</script>
+
+</body>
+</html>
