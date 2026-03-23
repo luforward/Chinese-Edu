@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文章中英双语生成器</title>
+    <title>文章段落双语生成器</title>
     <style>
         :root {
             --primary-color: #007AFF;
@@ -16,7 +16,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif;
             background-color: var(--bg-color);
             color: var(--text-chinese);
-            line-height: 1.6;
+            line-height: 1.8;
             margin: 0;
             padding: 40px 20px;
         }
@@ -33,7 +33,6 @@
             color: #333;
         }
 
-        /* 输入区 */
         .input-card {
             background: var(--card-bg);
             padding: 24px;
@@ -49,10 +48,10 @@
             border: 1px solid #d2d2d7;
             border-radius: 8px;
             font-size: 16px;
-            line-height: 1.6;
             box-sizing: border-box;
             outline: none;
             transition: border-color 0.3s;
+            resize: vertical;
         }
 
         textarea:focus {
@@ -71,45 +70,46 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s, transform 0.1s;
+            transition: background 0.3s;
         }
 
         button:hover { background-color: #0056b3; }
-        button:active { transform: scale(0.99); }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        button:disabled { background-color: #ccc; }
 
-        /* 展示区 */
         #output {
             background: var(--card-bg);
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            min-height: 100px;
         }
 
-        .segment {
-            margin-bottom: 25px;
-            border-left: 4px solid #eee;
-            padding-left: 15px;
+        .paragraph-block {
+            margin-bottom: 45px; /* 段落间距 */
         }
 
         .chinese {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 8px;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
             color: #000;
+            text-align: justify;
+            /* 关键修改：首行缩进2个字符 */
+            text-indent: 2em; 
         }
 
         .english {
-            color: var(--primary-color);
-            font-style: italic;
+            color: #666;
             font-size: 1rem;
-            min-height: 1.2em;
+            line-height: 1.6;
+            text-align: justify;
+            /* 英文翻译通常也保持缩进以对齐排版，
+               如果不希望英文缩进，可以将下面这行删除 */
+            text-indent: 2em; 
         }
 
         .loading-text {
             color: #bbb;
             font-size: 0.9em;
+            font-style: italic;
         }
 
         /* 打印适配 */
@@ -123,11 +123,11 @@
 <body>
 
 <div class="container">
-    <h1>文章中英双语生成器</h1>
+    <h1>文章段落双语生成器</h1>
 
     <div class="input-card">
-        <textarea id="articleInput" placeholder="在此粘贴你的中文文章..."></textarea>
-        <button id="submitBtn" onclick="generateDisplay()">提交文章并排版</button>
+        <textarea id="articleInput" placeholder="在此粘贴你的中文文章（按回车分段）..."></textarea>
+        <button id="submitBtn" onclick="generateParagraphs()">提交并按段落排版</button>
     </div>
 
     <div id="output">
@@ -136,7 +136,6 @@
 </div>
 
 <script>
-    // 免费翻译接口 (Google Translate GTX)
     async function translateText(text) {
         if (!text.trim()) return "";
         try {
@@ -145,12 +144,12 @@
             const data = await response.json();
             return data[0].map(item => item[0]).join('');
         } catch (error) {
-            console.error("翻译请求失败:", error);
-            return "Translation service unavailable.";
+            console.error("翻译失败:", error);
+            return "Translation error.";
         }
     }
 
-    async function generateDisplay() {
+    async function generateParagraphs() {
         const input = document.getElementById('articleInput').value.trim();
         const output = document.getElementById('output');
         const btn = document.getElementById('submitBtn');
@@ -161,47 +160,31 @@
         }
 
         btn.disabled = true;
-        btn.innerText = "正在翻译排版中...";
+        btn.innerText = "正在翻译段落...";
         output.innerHTML = ''; 
 
-        // 1. 智能切分逻辑
-        const rawSegments = input.split(/([。！？\n”"』）])/).filter(s => s !== undefined && s !== '');
-        
-        // 2. 粘连逻辑处理
-        let sentences = [];
-        for (let i = 0; i < rawSegments.length; i++) {
-            const part = rawSegments[i];
-            if (/[。！？\n”"』）]/.test(part) && sentences.length > 0) {
-                sentences[sentences.length - 1] += part;
-            } else {
-                sentences.push(part);
-            }
-        }
+        // 识别换行符进行切分
+        const paragraphs = input.split(/\n+/).map(p => p.trim()).filter(p => p.length > 0);
 
-        // 3. 渲染
-        for (let sentence of sentences) {
-            const cleanSentence = sentence.trim();
-            if (!cleanSentence) continue;
-
-            const segment = document.createElement('div');
-            segment.className = 'segment';
-            const translationId = "en-" + Math.random().toString(36).substr(2, 9);
+        for (let pText of paragraphs) {
+            const block = document.createElement('div');
+            block.className = 'paragraph-block';
+            const translationId = "p-" + Math.random().toString(36).substr(2, 9);
             
-            segment.innerHTML = `
-                <div class="chinese">${cleanSentence}</div>
-                <div id="${translationId}" class="english"><span class="loading-text">正在翻译...</span></div>
+            block.innerHTML = `
+                <div class="chinese">${pText}</div>
+                <div id="${translationId}" class="english"><span class="loading-text">正在翻译该段落...</span></div>
             `;
-            output.appendChild(segment);
+            output.appendChild(block);
 
-            // 异步翻译
-            translateText(cleanSentence).then(translated => {
+            translateText(pText).then(translated => {
                 const el = document.getElementById(translationId);
                 if (el) el.innerText = translated;
             });
         }
 
         btn.disabled = false;
-        btn.innerText = "提交文章并排版";
+        btn.innerText = "提交并按段落排版";
     }
 </script>
 
