@@ -1,4 +1,6 @@
-let lessons = [], lesson, step = 0, listenCount = 0, shadowIndex = 0, selectedRecallIndex = 0, englishVoice = null;
+let lessons = [], lesson, step = 0, listenCount = 0, shadowIndex = 0, selectedRecallIndex = 0;
+const audioCache = new Map();
+let activeAudio = null;
 const $ = (s) => document.querySelector(s);
 const screens = { home: $("#homeScreen"), lesson: $("#lessonScreen"), complete: $("#completeScreen") };
 const steps = [
@@ -11,23 +13,31 @@ const steps = [
 ];
 function escapeHtml(text) { return text.replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c])); }
 function chooseLesson() { const d = new Date(); return lessons[(d.getFullYear() * 366 + d.getMonth() * 31 + d.getDate()) % lessons.length]; }
-function selectEnglishVoice() {
-  const voices = speechSynthesis.getVoices();
-  const english = voices.filter(v => /^en-(US|GB|AU|CA|IE|NZ)$/i.test(v.lang));
-  // Prefer well-supported native English system and browser voices, then any English voice.
-  const preferred = /\b(Aria|Ava|Jenny|Michelle|Zira|Guy|Davis|Eric|Christopher|Samantha|Karen|Daniel|Moira|Google US English|Google UK English)\b/i;
-  englishVoice = english.find(v => preferred.test(v.name)) || english.find(v => /^en-US$/i.test(v.lang)) || english[0] || null;
-}
-function speak(text, onEnd) {
-  speechSynthesis.cancel();
-  selectEnglishVoice();
-  if (!englishVoice) { alert("此设备目前没有可用的英语语音。请在 Windows 的“设置 → 时间和语言 → 语音”中安装 English (United States) 或 English (United Kingdom) 语音包，然后重新打开网页。"); return; }
-  const u = new SpeechSynthesisUtterance(text);
-  u.voice = englishVoice;
-  u.lang = englishVoice.lang;
-  u.rate = .9;
-  u.onend = onEnd || null;
-  speechSynthesis.speak(u);
+async function speak(text, onEnd) {
+  if (location.protocol === "file:") {
+    alert("AI 英文语音需要先部署到 Vercel。请按 DEPLOY.md 中的说明完成部署后再播放。");
+    return;
+  }
+  try {
+    activeAudio?.pause();
+    let audioUrl = audioCache.get(text);
+    if (!audioUrl) {
+      const response = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+      if (!response.ok) throw new Error("TTS request failed");
+      audioUrl = URL.createObjectURL(await response.blob());
+      audioCache.set(text, audioUrl);
+    }
+    activeAudio = new Audio(audioUrl);
+    activeAudio.onended = onEnd || null;
+    await activeAudio.play();
+  } catch (error) {
+    alert("英文语音暂时无法播放。请检查网络、Vercel 环境变量和 API 额度。");
+    console.error(error);
+  }
 }
 function speakAll(done) { let i = 0; const next = () => { if (i >= lesson.dialogue.length) return done?.(); speak(lesson.dialogue[i++].en, () => setTimeout(next, 280)); }; next(); }
 function dialogue(showTranslation = false, withButtons = true) { return `<div class="dialogue">${lesson.dialogue.map((l,i) => `<div class="line"><span class="speaker">${l.speaker}</span><span class="english">${escapeHtml(l.en)}</span>${showTranslation ? `<span class="translation">${escapeHtml(l.zh)}</span>` : ""}${withButtons ? `<button class="speaker-button" type="button" data-speak="${i}" aria-label="播放这一句">🔊</button>` : ""}</div>`).join("")}</div>`; }
@@ -42,9 +52,7 @@ function renderStep() {
   $("#nextButton").innerHTML = step === 5 ? "完成今天的课程 <span>✓</span>" : "继续 <span>→</span>";
   const content = $("#lessonContent");
   if (step === 0 || step === 5) {
-    selectEnglishVoice();
-    const voiceHint = englishVoice ? `英语语音：${englishVoice.name}` : "未检测到英语语音；播放时会提示安装方法。";
-    content.innerHTML = `<div class="audio-panel"><button id="playAll" class="big-play" type="button" aria-label="播放整篇对话">▶</button><p class="listen-count">已完整听：<span id="listenCount">${listenCount}</span> 次</p><p class="listen-hint">${step === 0 ? "建议至少听 2 次后再继续。" : "不看文字，享受这次更轻松的聆听。"}<br>${voiceHint}</p></div>`;
+    content.innerHTML = `<div class="audio-panel"><button id="playAll" class="big-play" type="button" aria-label="播放整篇对话">▶</button><p class="listen-count">已完整听：<span id="listenCount">${listenCount}</span> 次</p><p class="listen-hint">${step === 0 ? "建议至少听 2 次后再继续。" : "不看文字，享受这次更轻松的聆听。"}<br>AI 英文语音 · 首次播放后会在本次学习中缓存。</p></div>`;
     $("#playAll").onclick = () => { $("#playAll").textContent = "…"; speakAll(() => { listenCount++; $("#listenCount").textContent = listenCount; $("#playAll").textContent = "▶"; }); };
   } else if (step === 1) { content.innerHTML = dialogue(false); attachSpeakers(); }
   else if (step === 2) { content.innerHTML = `${dialogue(true)}<div class="expression-grid">${lesson.expressions.map(e => `<div class="expression"><strong>${escapeHtml(e.en)}</strong><span>${escapeHtml(e.zh)}</span></div>`).join("")}</div>`; attachSpeakers(); }
@@ -68,12 +76,12 @@ const offlineLessons = [
   { id: "lost-package", title: "A Delivery Problem", topic: "询问快递", level: "B1", dialogue: [{ speaker: "Nina", en: "Hi, I'm calling about a package that hasn't arrived.", zh: "你好，我打电话询问一个还没送到的包裹。" }, { speaker: "Agent", en: "Could I have your order number, please?", zh: "请问可以提供订单号码吗？" }, { speaker: "Nina", en: "Sure, it's 70418. It was supposed to arrive yesterday.", zh: "当然，是70418。它本来应该昨天送到。" }, { speaker: "Agent", en: "Let me look into that for you.", zh: "我帮你查一下。" }, { speaker: "Agent", en: "It looks like the driver will deliver it this afternoon.", zh: "看来快递员会在今天下午送达。" }], expressions: [{ en: "I'm calling about …", zh: "我打电话是想询问……" }, { en: "It was supposed to …", zh: "它本来应该……" }, { en: "Let me look into that.", zh: "我来查一下。" }] },
   { id: "weekend-hike", title: "Weekend Plans", topic: "聊周末计划", level: "B1", dialogue: [{ speaker: "Owen", en: "Do you have any plans for the weekend?", zh: "你周末有什么计划吗？" }, { speaker: "Sara", en: "Not yet. I was thinking of going for a hike.", zh: "还没有。我正考虑去徒步。" }, { speaker: "Owen", en: "I'd be up for that. Which trail were you thinking of?", zh: "我愿意去。你想去哪条路线？" }, { speaker: "Sara", en: "The one by the lake. It's not too difficult.", zh: "湖边那条。难度不太大。" }, { speaker: "Owen", en: "Great. Let's check the weather first.", zh: "好。我们先看看天气。" }], expressions: [{ en: "I'd be up for that.", zh: "我愿意去。" }, { en: "Which … were you thinking of?", zh: "你想要哪个……？" }, { en: "Let's check … first.", zh: "我们先看看……。" }] }
 ];
-async function init() { selectEnglishVoice(); speechSynthesis.onvoiceschanged = selectEnglishVoice; try { const r = await fetch("lessons.json"); if (!r.ok) throw new Error("Local file loading is unavailable"); lessons = await r.json(); } catch { lessons = offlineLessons; } lesson = chooseLesson(); refreshHome(); }
+async function init() { try { const r = await fetch("lessons.json"); if (!r.ok) throw new Error("Local file loading is unavailable"); lessons = await r.json(); } catch { lessons = offlineLessons; } lesson = chooseLesson(); refreshHome(); }
 $("#startButton").onclick = () => { step = 0; listenCount = 0; shadowIndex = 0; selectedRecallIndex = 0; show("lesson"); renderStep(); };
 $("#resetTodayButton").onclick = () => { if (confirm("只重新开始今天的课程流程吗？已保存的总学习记录不会删除。")) { step = 0; listenCount = 0; show("lesson"); renderStep(); } };
 $("#nextButton").onclick = () => { if (step === 0 && listenCount < 2 && !confirm("建议至少完整听两遍。仍要继续吗？")) return; if (step === 5) complete(); else { step++; renderStep(); } };
 $("#previousButton").onclick = () => { if (step) { step--; renderStep(); } };
-$("#backHomeButton").onclick = () => { speechSynthesis.cancel(); refreshHome(); show("home"); };
+$("#backHomeButton").onclick = () => { activeAudio?.pause(); refreshHome(); show("home"); };
 $("#homeFromCompleteButton").onclick = () => { refreshHome(); show("home"); };
 $("#statsButton").onclick = () => { const s = AssimilStore.summary(); $("#statsContent").innerHTML = `<div class="stat-grid"><div class="stat"><strong>${s.completedLessonIds.length}</strong><span>完成课程</span></div><div class="stat"><strong>${s.streak}</strong><span>连续学习天数</span></div><div class="stat"><strong>${s.reviewAttempts}</strong><span>回忆练习次数</span></div><div class="stat"><strong>${s.accuracy === null ? "—" : s.accuracy + "%"}</strong><span>复习表现</span></div></div><p class="muted">所有记录只保存于这台设备的浏览器中。</p>`; $("#statsDialog").showModal(); };
 $("#closeStatsButton").onclick = () => $("#statsDialog").close();
