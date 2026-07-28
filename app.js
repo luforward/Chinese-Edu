@@ -1,6 +1,4 @@
 let lessons = [], lesson, step = 0, listenCount = 0, shadowIndex = 0, selectedRecallIndex = 0;
-const audioCache = new Map();
-let activeAudio = null;
 const $ = (s) => document.querySelector(s);
 const screens = { home: $("#homeScreen"), lesson: $("#lessonScreen"), complete: $("#completeScreen") };
 const steps = [
@@ -13,31 +11,13 @@ const steps = [
 ];
 function escapeHtml(text) { return text.replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c])); }
 function chooseLesson() { const d = new Date(); return lessons[(d.getFullYear() * 366 + d.getMonth() * 31 + d.getDate()) % lessons.length]; }
-async function speak(text, onEnd) {
-  if (location.protocol === "file:") {
-    alert("AI 英文语音需要先部署到 Vercel。请按 DEPLOY.md 中的说明完成部署后再播放。");
-    return;
-  }
-  try {
-    activeAudio?.pause();
-    let audioUrl = audioCache.get(text);
-    if (!audioUrl) {
-      const response = await fetch("/api/tts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text })
-      });
-      if (!response.ok) throw new Error("TTS request failed");
-      audioUrl = URL.createObjectURL(await response.blob());
-      audioCache.set(text, audioUrl);
-    }
-    activeAudio = new Audio(audioUrl);
-    activeAudio.onended = onEnd || null;
-    await activeAudio.play();
-  } catch (error) {
-    alert("英文语音暂时无法播放。请检查网络、Vercel 环境变量和 API 额度。");
-    console.error(error);
-  }
+function speak(text, onEnd) {
+  speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-US";
+  utterance.rate = 0.9;
+  utterance.onend = onEnd || null;
+  speechSynthesis.speak(utterance);
 }
 function speakAll(done) { let i = 0; const next = () => { if (i >= lesson.dialogue.length) return done?.(); speak(lesson.dialogue[i++].en, () => setTimeout(next, 280)); }; next(); }
 function dialogue(showTranslation = false, withButtons = true) { return `<div class="dialogue">${lesson.dialogue.map((l,i) => `<div class="line"><span class="speaker">${l.speaker}</span><span class="english">${escapeHtml(l.en)}</span>${showTranslation ? `<span class="translation">${escapeHtml(l.zh)}</span>` : ""}${withButtons ? `<button class="speaker-button" type="button" data-speak="${i}" aria-label="播放这一句">🔊</button>` : ""}</div>`).join("")}</div>`; }
@@ -52,7 +32,7 @@ function renderStep() {
   $("#nextButton").innerHTML = step === 5 ? "完成今天的课程 <span>✓</span>" : "继续 <span>→</span>";
   const content = $("#lessonContent");
   if (step === 0 || step === 5) {
-    content.innerHTML = `<div class="audio-panel"><button id="playAll" class="big-play" type="button" aria-label="播放整篇对话">▶</button><p class="listen-count">已完整听：<span id="listenCount">${listenCount}</span> 次</p><p class="listen-hint">${step === 0 ? "建议至少听 2 次后再继续。" : "不看文字，享受这次更轻松的聆听。"}<br>AI 英文语音 · 首次播放后会在本次学习中缓存。</p></div>`;
+    content.innerHTML = `<div class="audio-panel"><button id="playAll" class="big-play" type="button" aria-label="播放整篇对话">▶</button><p class="listen-count">已完整听：<span id="listenCount">${listenCount}</span> 次</p><p class="listen-hint">${step === 0 ? "建议至少听 2 次后再继续。" : "不看文字，享受这次更轻松的聆听。"}</p></div>`;
     $("#playAll").onclick = () => { $("#playAll").textContent = "…"; speakAll(() => { listenCount++; $("#listenCount").textContent = listenCount; $("#playAll").textContent = "▶"; }); };
   } else if (step === 1) { content.innerHTML = dialogue(false); attachSpeakers(); }
   else if (step === 2) { content.innerHTML = `${dialogue(true)}<div class="expression-grid">${lesson.expressions.map(e => `<div class="expression"><strong>${escapeHtml(e.en)}</strong><span>${escapeHtml(e.zh)}</span></div>`).join("")}</div>`; attachSpeakers(); }
@@ -81,7 +61,7 @@ $("#startButton").onclick = () => { step = 0; listenCount = 0; shadowIndex = 0; 
 $("#resetTodayButton").onclick = () => { if (confirm("只重新开始今天的课程流程吗？已保存的总学习记录不会删除。")) { step = 0; listenCount = 0; show("lesson"); renderStep(); } };
 $("#nextButton").onclick = () => { if (step === 0 && listenCount < 2 && !confirm("建议至少完整听两遍。仍要继续吗？")) return; if (step === 5) complete(); else { step++; renderStep(); } };
 $("#previousButton").onclick = () => { if (step) { step--; renderStep(); } };
-$("#backHomeButton").onclick = () => { activeAudio?.pause(); refreshHome(); show("home"); };
+$("#backHomeButton").onclick = () => { speechSynthesis.cancel(); refreshHome(); show("home"); };
 $("#homeFromCompleteButton").onclick = () => { refreshHome(); show("home"); };
 $("#statsButton").onclick = () => { const s = AssimilStore.summary(); $("#statsContent").innerHTML = `<div class="stat-grid"><div class="stat"><strong>${s.completedLessonIds.length}</strong><span>完成课程</span></div><div class="stat"><strong>${s.streak}</strong><span>连续学习天数</span></div><div class="stat"><strong>${s.reviewAttempts}</strong><span>回忆练习次数</span></div><div class="stat"><strong>${s.accuracy === null ? "—" : s.accuracy + "%"}</strong><span>复习表现</span></div></div><p class="muted">所有记录只保存于这台设备的浏览器中。</p>`; $("#statsDialog").showModal(); };
 $("#closeStatsButton").onclick = () => $("#statsDialog").close();
