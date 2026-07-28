@@ -10,7 +10,24 @@ const steps = [
   { title: "最后再听", instruction: "最后完整听一遍。你会发现，现在已经能自然地听懂更多了。" }
 ];
 function escapeHtml(text) { return text.replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c])); }
-function chooseLesson() { const d = new Date(); return lessons[(d.getFullYear() * 366 + d.getMonth() * 31 + d.getDate()) % lessons.length]; }
+function chooseLesson(excludeId = null) {
+  const choices = lessons.filter(item => item.id !== excludeId);
+  const pool = choices.length ? choices : lessons;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+function startCurrentLesson() {
+  step = 0;
+  listenCount = 0;
+  shadowIndex = 0;
+  selectedRecallIndex = 0;
+  show("lesson");
+  renderStep();
+}
+function nextPractice() {
+  lesson = chooseLesson(lesson?.id);
+  refreshHome();
+  startCurrentLesson();
+}
 function speak(text, onEnd) {
   speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
@@ -57,12 +74,14 @@ const offlineLessons = [
   { id: "weekend-hike", title: "Weekend Plans", topic: "聊周末计划", level: "B1", dialogue: [{ speaker: "Owen", en: "Do you have any plans for the weekend?", zh: "你周末有什么计划吗？" }, { speaker: "Sara", en: "Not yet. I was thinking of going for a hike.", zh: "还没有。我正考虑去徒步。" }, { speaker: "Owen", en: "I'd be up for that. Which trail were you thinking of?", zh: "我愿意去。你想去哪条路线？" }, { speaker: "Sara", en: "The one by the lake. It's not too difficult.", zh: "湖边那条。难度不太大。" }, { speaker: "Owen", en: "Great. Let's check the weather first.", zh: "好。我们先看看天气。" }], expressions: [{ en: "I'd be up for that.", zh: "我愿意去。" }, { en: "Which … were you thinking of?", zh: "你想要哪个……？" }, { en: "Let's check … first.", zh: "我们先看看……。" }] }
 ];
 async function init() { try { const r = await fetch("lessons.json"); if (!r.ok) throw new Error("Local file loading is unavailable"); lessons = await r.json(); } catch { lessons = offlineLessons; } lesson = chooseLesson(); refreshHome(); }
-$("#startButton").onclick = () => { step = 0; listenCount = 0; shadowIndex = 0; selectedRecallIndex = 0; show("lesson"); renderStep(); };
+$("#startButton").onclick = startCurrentLesson;
+$("#nextPracticeButton").onclick = nextPractice;
 $("#resetTodayButton").onclick = () => { if (confirm("只重新开始今天的课程流程吗？已保存的总学习记录不会删除。")) { step = 0; listenCount = 0; show("lesson"); renderStep(); } };
 $("#nextButton").onclick = () => { if (step === 0 && listenCount < 2 && !confirm("建议至少完整听两遍。仍要继续吗？")) return; if (step === 5) complete(); else { step++; renderStep(); } };
 $("#previousButton").onclick = () => { if (step) { step--; renderStep(); } };
 $("#backHomeButton").onclick = () => { speechSynthesis.cancel(); refreshHome(); show("home"); };
 $("#homeFromCompleteButton").onclick = () => { refreshHome(); show("home"); };
+$("#nextPracticeFromCompleteButton").onclick = nextPractice;
 $("#statsButton").onclick = () => { const s = AssimilStore.summary(); $("#statsContent").innerHTML = `<div class="stat-grid"><div class="stat"><strong>${s.completedLessonIds.length}</strong><span>完成课程</span></div><div class="stat"><strong>${s.streak}</strong><span>连续学习天数</span></div><div class="stat"><strong>${s.reviewAttempts}</strong><span>回忆练习次数</span></div><div class="stat"><strong>${s.accuracy === null ? "—" : s.accuracy + "%"}</strong><span>复习表现</span></div></div><p class="muted">所有记录只保存于这台设备的浏览器中。</p>`; $("#statsDialog").showModal(); };
 $("#closeStatsButton").onclick = () => $("#statsDialog").close();
 $("#clearProgressButton").onclick = () => { if (confirm("确定要清除所有本地学习记录吗？此操作无法恢复。")) { AssimilStore.clear(); $("#statsDialog").close(); refreshHome(); } };

@@ -21,6 +21,7 @@
           <p id="lessonMeta" class="muted">加载课程中…</p>
           <div class="progress-summary"><div><strong id="streakValue">0</strong><span>连续天数</span></div><div><strong id="completedValue">0</strong><span>完成课程</span></div><div><strong id="reviewValue">—</strong><span>复习表现</span></div></div>
           <button id="startButton" class="primary-button" type="button">开始今天的学习 <span>→</span></button>
+          <button id="nextPracticeButton" class="secondary-button" type="button">🎲 下一个练习</button>
           <button id="resetTodayButton" class="quiet-button" type="button">重新开始本课</button>
         </div>
         <section class="plan-card"><p class="eyebrow">30 MINUTES</p><h2>固定六步，不用思考学什么</h2><ol class="plan-list"><li>只听，感受节奏</li><li>看英文，理解情境</li><li>对照中文，确认意思</li><li>跟读，模仿语音语调</li><li>合书回忆，主动输出</li><li>最后再听，完成吸收</li></ol></section>
@@ -37,7 +38,7 @@
       </section>
 
       <section id="completeScreen" class="screen" aria-labelledby="completeTitle">
-        <div class="complete-card"><div class="celebration">✓</div><p class="eyebrow">TODAY COMPLETE</p><h1 id="completeTitle">完成得很好。</h1><p>你已经完成今天的输入、模仿和回忆。明天再来一点，英语会慢慢变成你的直觉。</p><div id="completeStats" class="completion-stats"></div><button id="homeFromCompleteButton" class="primary-button" type="button">回到首页</button></div>
+        <div class="complete-card"><div class="celebration">✓</div><p class="eyebrow">TODAY COMPLETE</p><h1 id="completeTitle">完成得很好。</h1><p>你已经完成今天的输入、模仿和回忆。明天再来一点，英语会慢慢变成你的直觉。</p><div id="completeStats" class="completion-stats"></div><button id="homeFromCompleteButton" class="primary-button" type="button">回到首页</button><button id="nextPracticeFromCompleteButton" class="secondary-button" type="button">🎲 下一个练习</button></div>
       </section>
 
       <dialog id="statsDialog"><div class="dialog-head"><h2>学习记录</h2><button id="closeStatsButton" class="icon-button" type="button" aria-label="关闭">×</button></div><div id="statsContent"></div><button id="clearProgressButton" class="danger-button" type="button">清除所有本地记录</button></dialog>
