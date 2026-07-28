@@ -28,6 +28,18 @@ function nextPractice() {
   refreshHome();
   startCurrentLesson();
 }
+function renderLessonList() {
+  const list = $("#lessonList");
+  if (!list) return;
+  list.innerHTML = lessons.map((item, index) => `<button class="lesson-choice ${item.id === lesson?.id ? "current" : ""}" type="button" data-lesson-index="${index}"><span class="lesson-number">${String(index + 1).padStart(2, "0")}</span><span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.topic)}</small></span><b>→</b></button>`).join("");
+  list.querySelectorAll("[data-lesson-index]").forEach(button => {
+    button.onclick = () => {
+      lesson = lessons[Number(button.dataset.lessonIndex)];
+      refreshHome();
+      startCurrentLesson();
+    };
+  });
+}
 function speak(text, onEnd) {
   speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
@@ -66,14 +78,14 @@ function renderRecall(content) { const l = lesson.dialogue[selectedRecallIndex];
   $("#nextRecall").onclick = () => { selectedRecallIndex = (selectedRecallIndex + 1) % lesson.dialogue.length; renderRecall(content); };
 }
 function show(name) { Object.values(screens).forEach(s => s.classList.remove("active")); screens[name].classList.add("active"); window.scrollTo({ top: 0, behavior: "smooth" }); }
-function refreshHome() { const s = AssimilStore.summary(); $("#dayLabel").textContent = `DAY ${s.completedLessonIds.length + 1}`; $("#lessonMeta").textContent = `${lesson.title} · ${lesson.topic} · ${lesson.level} · 约 30 分钟`; $("#streakValue").textContent = s.streak; $("#completedValue").textContent = s.completedLessonIds.length; $("#reviewValue").textContent = s.accuracy === null ? "—" : `${s.accuracy}%`; }
+function refreshHome() { const s = AssimilStore.summary(); $("#dayLabel").textContent = `DAY ${s.completedLessonIds.length + 1}`; $("#lessonMeta").textContent = `${lesson.title} · ${lesson.topic} · ${lesson.level} · 约 30 分钟`; $("#streakValue").textContent = s.streak; $("#completedValue").textContent = s.completedLessonIds.length; $("#reviewValue").textContent = s.accuracy === null ? "—" : `${s.accuracy}%`; renderLessonList(); }
 function complete() { AssimilStore.completeLesson(lesson.id); const s = AssimilStore.summary(); $("#completeStats").innerHTML = `<div><strong>${listenCount}</strong><span>完整聆听</span></div><div><strong>${s.streak}</strong><span>连续天数</span></div><div><strong>${s.accuracy === null ? "—" : s.accuracy + "%"}</strong><span>复习表现</span></div>`; show("complete"); }
-const offlineLessons = [
+const legacyLessons = [
   { id: "coffee-plan", title: "Making Plans", topic: "安排一次午餐", level: "B1", dialogue: [{ speaker: "Mia", en: "Are you free for lunch this Friday?", zh: "这周五你有空一起吃午饭吗？" }, { speaker: "Leo", en: "I think so. What did you have in mind?", zh: "我想可以。你有什么想法？" }, { speaker: "Mia", en: "There's a new little café near the station.", zh: "车站附近新开了一家小咖啡馆。" }, { speaker: "Leo", en: "Sounds good. Shall we meet there at twelve?", zh: "听起来不错。我们十二点在那里见面好吗？" }, { speaker: "Mia", en: "Perfect. I'll book us a table.", zh: "太好了。我来订位。" }], expressions: [{ en: "What did you have in mind?", zh: "你有什么想法？" }, { en: "Sounds good.", zh: "听起来不错。" }, { en: "Shall we …?", zh: "我们……好吗？" }] },
   { id: "lost-package", title: "A Delivery Problem", topic: "询问快递", level: "B1", dialogue: [{ speaker: "Nina", en: "Hi, I'm calling about a package that hasn't arrived.", zh: "你好，我打电话询问一个还没送到的包裹。" }, { speaker: "Agent", en: "Could I have your order number, please?", zh: "请问可以提供订单号码吗？" }, { speaker: "Nina", en: "Sure, it's 70418. It was supposed to arrive yesterday.", zh: "当然，是70418。它本来应该昨天送到。" }, { speaker: "Agent", en: "Let me look into that for you.", zh: "我帮你查一下。" }, { speaker: "Agent", en: "It looks like the driver will deliver it this afternoon.", zh: "看来快递员会在今天下午送达。" }], expressions: [{ en: "I'm calling about …", zh: "我打电话是想询问……" }, { en: "It was supposed to …", zh: "它本来应该……" }, { en: "Let me look into that.", zh: "我来查一下。" }] },
   { id: "weekend-hike", title: "Weekend Plans", topic: "聊周末计划", level: "B1", dialogue: [{ speaker: "Owen", en: "Do you have any plans for the weekend?", zh: "你周末有什么计划吗？" }, { speaker: "Sara", en: "Not yet. I was thinking of going for a hike.", zh: "还没有。我正考虑去徒步。" }, { speaker: "Owen", en: "I'd be up for that. Which trail were you thinking of?", zh: "我愿意去。你想去哪条路线？" }, { speaker: "Sara", en: "The one by the lake. It's not too difficult.", zh: "湖边那条。难度不太大。" }, { speaker: "Owen", en: "Great. Let's check the weather first.", zh: "好。我们先看看天气。" }], expressions: [{ en: "I'd be up for that.", zh: "我愿意去。" }, { en: "Which … were you thinking of?", zh: "你想要哪个……？" }, { en: "Let's check … first.", zh: "我们先看看……。" }] }
 ];
-async function init() { try { const r = await fetch("lessons.json"); if (!r.ok) throw new Error("Local file loading is unavailable"); lessons = await r.json(); } catch { lessons = offlineLessons; } lesson = chooseLesson(); refreshHome(); }
+async function init() { try { const r = await fetch("lessons.json"); if (!r.ok) throw new Error("Local file loading is unavailable"); lessons = await r.json(); } catch { lessons = window.ASSIMIL_LESSONS || legacyLessons; } if (window.ASSIMIL_LESSONS?.length) lessons = window.ASSIMIL_LESSONS; lesson = chooseLesson(); refreshHome(); }
 $("#startButton").onclick = startCurrentLesson;
 $("#nextPracticeButton").onclick = nextPractice;
 $("#resetTodayButton").onclick = () => { if (confirm("只重新开始今天的课程流程吗？已保存的总学习记录不会删除。")) { step = 0; listenCount = 0; show("lesson"); renderStep(); } };
